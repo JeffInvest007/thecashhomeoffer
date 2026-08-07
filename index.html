@@ -586,6 +586,31 @@ details,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
   box-shadow:var(--shadow-hover);
 }
 .sit:hover svg{color:var(--ink-3)}
+.sit svg{transition:color .18s ease}
+
+/* situation chips light themselves up at random, same idea as the hero */
+.sit.glow{
+  transition:transform .5s var(--lift),box-shadow .5s ease,
+             border-color .5s ease,background .5s ease,color .5s ease;
+}
+.sit.glow svg{transition:color .5s ease}
+.sit.glow.on{
+  transform:translateY(-3px) scale(1.02);
+  border-color:var(--ink-3);
+  background:var(--sky-soft);
+  box-shadow:var(--shadow-hover);
+}
+.sit.glow.on svg{color:var(--ink-3)}
+.sit.glow.warm-lit.on{
+  border-color:var(--gold-2);
+  background:var(--gold-soft);
+  color:#6B4A08;
+  box-shadow:0 12px 30px -8px rgba(196,138,23,.34);
+}
+.sit.glow.warm-lit.on svg{color:var(--gold-2)}
+@media (prefers-reduced-motion:reduce){
+  .sit.glow,.sit.glow.on{transition:none;transform:none}
+}
 
 /* --- steps --- */
 .step:hover{transform:translateY(-3px)}
@@ -1943,6 +1968,59 @@ body.menu-open .sticky{display:none}
     document.addEventListener('visibilitychange',function(){
       if(document.hidden){ clearTimeout(timer); }
       else if(!timer===false || document.visibilityState==='visible'){ clearTimeout(timer); tick(); }
+    });
+  })();
+
+
+  /* =======================================================
+     SITUATION CHIPS: light up on their own, two at a time
+  ======================================================= */
+  (function(){
+    var sits=[].slice.call(document.querySelectorAll('.sits .sit'));
+    var section=document.getElementById('situations');
+    if(!sits.length || !section) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var inView=true, timer=null;
+    if('IntersectionObserver' in window){
+      inView=false;
+      new IntersectionObserver(function(entries){
+        inView=entries[0].isIntersecting;
+      },{threshold:0.12}).observe(section);
+    }
+
+    var FADE=500;
+    function fire(){
+      if(!inView) return;
+      var free=[];
+      for(var i=0;i<sits.length;i++){ if(!sits[i].classList.contains('glow')) free.push(sits[i]); }
+      if(!free.length) return;
+
+      var el=free[Math.floor(Math.random()*free.length)];
+      var warm=Math.random()<0.30;
+      el.classList.add('glow');
+      if(warm) el.classList.add('warm-lit');
+
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ el.classList.add('on'); });
+      });
+
+      var hold=900+Math.random()*900;
+      setTimeout(function(){
+        el.classList.remove('on');
+        setTimeout(function(){ el.classList.remove('glow'); el.classList.remove('warm-lit'); }, FADE+40);
+      }, FADE+hold);
+    }
+
+    function tick(){
+      fire();
+      timer=setTimeout(tick, 430+Math.random()*620);
+    }
+    fire(); setTimeout(fire,300); tick();
+
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){ clearTimeout(timer); }
+      else { clearTimeout(timer); tick(); }
     });
   })();
 
