@@ -62,6 +62,7 @@ p{margin:0 0 1em}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
 .sec{padding:76px 0}
+section[id],div[id]{scroll-margin-top:78px}
 .sec-sm{padding:56px 0}
 .center{text-align:center}
 .lede{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--muted);max-width:64ch}
@@ -639,6 +640,20 @@ details:hover summary::after{border-color:var(--ink-3)}
 /* ============================================================ */
 
 /* ---------- responsive ---------- */
+@media (max-width:1210px){
+  .nav-links{gap:14px}
+  .nav-links a{font-size:.86rem}
+  .nav-phone{padding:10px 13px;font-size:.93rem}
+  .nav .btn{padding:12px 15px;font-size:.87rem}
+  .logo-txt b{font-size:.93rem}
+}
+@media (max-width:1100px){
+  .nav{gap:14px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:.82rem}
+  .nav .btn{display:none}
+  .logo-txt span{display:none}
+}
 @media (max-width:1020px){
   .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "form" "extra";row-gap:34px;padding:52px 0 34px}
   .hero-sub{max-width:52ch}
@@ -738,6 +753,7 @@ details:hover summary::after{border-color:var(--ink-3)}
         <a href="#formula">Straight Talk</a>
         <a href="#compare">Compare</a>
         <a href="#probate">Probate</a>
+        <a href="#about">Meet Jeff</a>
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
@@ -1163,9 +1179,9 @@ details:hover summary::after{border-color:var(--ink-3)}
         <div class="founder-badge">Jeff &middot; Probate Assets Elite LLC</div>
       </div>
       <div>
-        <span class="eyebrow">Who you are calling</span>
+        <span class="eyebrow">About Jeff</span>
         <h2>You are not calling a call center. You are calling Jeff.</h2>
-        <p class="lede">My parents have owned a restaurant in Miami since 1996. No point of sale system, no card reader, no app. A drawer, a pen, and a notepad. I grew up watching them count the day out on the table after close, and I learned early that a business does not survive on what it is <em>worth</em>. It survives on <strong>what is in the drawer.</strong></p>
+        <p class="lede">My parents have owned a restaurant in Miami since 1996. No point of sale system, no card reader, no app. Literally a drawer, a pen, and a long yellow notepad. I grew up watching them count the day out on the table after close, and I learned early that a business does not survive on what it is <em>worth</em>. It survives on <strong>what is in the drawer.</strong></p>
         <p class="lede">That is the whole difference between a house and cash. A house can be worth four hundred thousand dollars and still not stop a foreclosure, settle an estate, cover a funeral, or get somebody's mother into a better place. Cash does that. <strong>Cash in hand was the only kind that ever helped my family</strong>, and it is the only kind I deal in now.</p>
         <p class="lede">So that is the job. I put a real number in front of people who need it now instead of maybe, and it closes through a licensed title company so it is clean and it is protected. No repairs, no banks, no six months of strangers walking through your house. My parents taught me the number in the drawer is the only one that counts. <strong>Getting families to that number is all I do.</strong></p>
         <p class="sig">Jeff<span>Founder, Probate Assets Elite LLC &middot; The Cash Home Offer</span></p>
@@ -1295,6 +1311,7 @@ details:hover summary::after{border-color:var(--ink-3)}
         <a href="#formula">What a Cash Offer Really Is</a>
         <a href="#compare">Compare Your Options</a>
         <a href="#probate">Probate &amp; Inherited Homes</a>
+        <a href="#about">Meet Jeff</a>
         <a href="#faq">FAQ</a>
         <a href="#offer-form">Get My Cash Offer</a>
       </div>
