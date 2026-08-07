@@ -1853,26 +1853,55 @@ body.menu-open .sticky{display:none}
       pool.push({el:el,busy:false});
     }
 
+    var card=document.getElementById('offer-form');
     var lastKey='';
+
     function light(){
       var free=[];
       for(var i=0;i<pool.length;i++){ if(!pool[i].busy) free.push(pool[i]); }
       if(!free.length) return;
-      var slot=free[Math.floor(Math.random()*free.length)];
 
+      var lr=layer.getBoundingClientRect();
       var w=layer.clientWidth, hgt=layer.clientHeight;
       if(!w||!hgt) return;
-      var cols=Math.ceil(w/CELL), rows=Math.ceil(hgt/CELL);
-      var cx,cy,key,tries=0;
-      do{
-        cx=Math.floor(Math.random()*cols);
-        cy=Math.floor(Math.random()*rows);
-        key=cx+':'+cy;
+
+      /* only spawn where the visitor can actually see it */
+      var visTop=Math.max(0, -lr.top);
+      var visBot=Math.min(hgt, (window.innerHeight||0) - lr.top);
+      if(visBot-visTop < CELL) return;          /* hero is off screen */
+
+      var rowStart=Math.floor(visTop/CELL);
+      var rowEnd=Math.ceil(visBot/CELL)-1;
+      var cols=Math.ceil(w/CELL);
+      if(rowEnd<rowStart) return;
+
+      /* never light up behind the opaque offer card, it is wasted */
+      var ex=null;
+      if(card){
+        var cr=card.getBoundingClientRect();
+        if(cr.width>0 && cr.height>0){
+          ex={x0:cr.left-lr.left-8, y0:cr.top-lr.top-8,
+              x1:cr.right-lr.left+8, y1:cr.bottom-lr.top+8};
+        }
+      }
+
+      var cx,cy,px,py,key,bad=true,tries=0;
+      while(bad && tries<45){
         tries++;
-      } while(key===lastKey && tries<5);
+        cx=Math.floor(Math.random()*cols);
+        cy=rowStart+Math.floor(Math.random()*(rowEnd-rowStart+1));
+        px=cx*CELL; py=cy*CELL;
+        key=cx+':'+cy;
+        bad=(key===lastKey);
+        if(!bad && ex){
+          bad = !(px+CELL<=ex.x0 || px>=ex.x1 || py+CELL<=ex.y0 || py>=ex.y1);
+        }
+      }
+      if(bad) return;                            /* skip a beat rather than waste one */
       lastKey=key;
 
-      slot.el.style.transform='translate3d('+(cx*CELL)+'px,'+(cy*CELL)+'px,0)';
+      var slot=free[Math.floor(Math.random()*free.length)];
+      slot.el.style.transform='translate3d('+px+'px,'+py+'px,0)';
       slot.el.classList.toggle('warm', Math.random()<0.28);
       slot.busy=true;
 
@@ -1889,7 +1918,7 @@ body.menu-open .sticky{display:none}
     var timer=null;
     function tick(){
       light();
-      timer=setTimeout(tick, 250+Math.random()*340);
+      timer=setTimeout(tick, 185+Math.random()*265);
     }
     /* two lit right away, then a rolling random cadence */
     light(); setTimeout(light,140); tick();
