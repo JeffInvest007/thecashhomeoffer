@@ -130,9 +130,40 @@ header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.92);backdro
   overflow:hidden;
 }
 .hero::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.055;
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.075;z-index:0;
   background-image:linear-gradient(rgba(255,255,255,.9) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.9) 1px,transparent 1px);
-  background-size:64px 64px;mask-image:radial-gradient(900px 560px at 70% 10%,#000,transparent 75%);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(1500px 950px at 50% 42%,#000 38%,transparent 92%);
+  mask-image:radial-gradient(1500px 950px at 50% 42%,#000 38%,transparent 92%);
+}
+
+/* ---------- hero: random glowing grid cells ---------- */
+.hero-glow{
+  position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:radial-gradient(1500px 950px at 50% 42%,#000 38%,transparent 92%);
+  mask-image:radial-gradient(1500px 950px at 50% 42%,#000 38%,transparent 92%);
+}
+.glow-cell{
+  position:absolute;top:0;left:0;width:64px;height:64px;opacity:0;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.30),rgba(255,255,255,.10) 62%,transparent 78%),
+    linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,255,255,1),
+    inset 0 0 14px rgba(255,255,255,.35),
+    0 0 26px rgba(255,255,255,.55),
+    0 0 60px rgba(127,188,236,.40);
+  will-change:opacity,transform;
+}
+.glow-cell.warm{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,214,132,.34),rgba(233,180,76,.12) 62%,transparent 78%),
+    linear-gradient(160deg,rgba(233,180,76,.20),rgba(233,180,76,.06));
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,228,170,1),
+    inset 0 0 14px rgba(233,180,76,.40),
+    0 0 26px rgba(233,180,76,.60),
+    0 0 60px rgba(233,180,76,.38);
 }
 .hero-grid{
   position:relative;z-index:2;display:grid;grid-template-columns:1.06fr .94fr;
@@ -1795,6 +1826,77 @@ body.menu-open .sticky{display:none}
     });
     window.addEventListener('resize',function(){
       if(window.innerWidth>1020 && open) setOpen(false);
+    });
+  })();
+
+
+  /* =======================================================
+     HERO: grid cells that light up at random, like string lights
+  ======================================================= */
+  (function(){
+    var hero=document.querySelector('.hero');
+    if(!hero) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(!Element.prototype.animate) return;
+
+    var CELL=64, POOL=6;
+    var layer=document.createElement('div');
+    layer.className='hero-glow';
+    layer.setAttribute('aria-hidden','true');
+    hero.appendChild(layer);
+
+    var pool=[];
+    for(var i=0;i<POOL;i++){
+      var el=document.createElement('i');
+      el.className='glow-cell';
+      layer.appendChild(el);
+      pool.push({el:el,busy:false});
+    }
+
+    var lastKey='';
+    function light(){
+      var free=[];
+      for(var i=0;i<pool.length;i++){ if(!pool[i].busy) free.push(pool[i]); }
+      if(!free.length) return;
+      var slot=free[Math.floor(Math.random()*free.length)];
+
+      var w=layer.clientWidth, hgt=layer.clientHeight;
+      if(!w||!hgt) return;
+      var cols=Math.ceil(w/CELL), rows=Math.ceil(hgt/CELL);
+      var cx,cy,key,tries=0;
+      do{
+        cx=Math.floor(Math.random()*cols);
+        cy=Math.floor(Math.random()*rows);
+        key=cx+':'+cy;
+        tries++;
+      } while(key===lastKey && tries<5);
+      lastKey=key;
+
+      slot.el.style.transform='translate3d('+(cx*CELL)+'px,'+(cy*CELL)+'px,0)';
+      slot.el.classList.toggle('warm', Math.random()<0.28);
+      slot.busy=true;
+
+      var dur=1700+Math.random()*1500;
+      var peak=0.78+Math.random()*0.22;
+      var anim=slot.el.animate(
+        [{opacity:0},{opacity:peak,offset:0.22},{opacity:peak,offset:0.68},{opacity:0}],
+        {duration:dur, easing:'cubic-bezier(.4,0,.3,1)'}
+      );
+      anim.onfinish=function(){ slot.busy=false; };
+      anim.oncancel=function(){ slot.busy=false; };
+    }
+
+    var timer=null;
+    function tick(){
+      light();
+      timer=setTimeout(tick, 430+Math.random()*620);
+    }
+    /* two lit right away, then a rolling random cadence */
+    light(); setTimeout(light,280); tick();
+
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){ clearTimeout(timer); }
+      else if(!timer===false || document.visibilityState==='visible'){ clearTimeout(timer); tick(); }
     });
   })();
 
