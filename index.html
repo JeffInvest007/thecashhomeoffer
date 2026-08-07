@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sell My House Fast in Miami, Fort Lauderdale &amp; West Palm Beach | Cash Offer in 24 Hours</title>
 <meta name="description" content="We buy houses for cash in Miami-Dade, Broward and Palm Beach. Written offer in 24 hours, close in as little as 7 days, zero fees or commissions. Probate and inherited homes are our specialty. Call (786) 920-7419.">
-<meta name="theme-color" content="#0B1524">
+<meta name="theme-color" content="#14283F">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://thecashhomeoffer.com/">
 <meta name="geo.region" content="US-FL">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://thecashhomeoffer.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1524'/%3E%3Cpath d='M32 14 L52 30 H46 V50 H18 V30 H12 Z' fill='%23E9B44C'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314283F'/%3E%3Cpath d='M32 14 L52 30 H46 V50 H18 V30 H12 Z' fill='%23E9B44C'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,14 +27,18 @@
 
 <style>
 :root{
-  --ink:#0B1524; --ink-2:#12213A; --ink-3:#1B2E4C;
-  --gold:#E9B44C; --gold-2:#D89B2A; --gold-soft:#FBF3E1;
+  /* tri-blue: deep, mid, light */
+  --ink:#14283F; --ink-2:#1E3D63; --ink-3:#2C578A;
+  --sky:#7FBCEC; --sky-soft:#EAF4FD;
+  --gold:#E9B44C; --gold-2:#C48A17; --gold-soft:#FBF3E1;
   --green:#12875A; --green-soft:#E6F4EC;
   --red:#B4402F;
-  --paper:#FFFFFF; --mist:#F5F7FA; --line:#E3E8EF;
+  --paper:#FFFFFF; --mist:#F4F7FB; --line:#DFE7F0;
   --text:#101828; --muted:#4B5768; --faint:#7A879B;
   --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.08);
-  --shadow-lg:0 24px 60px -12px rgba(11,21,36,.32);
+  --shadow-hover:0 12px 30px -8px rgba(20,40,63,.24),0 3px 8px rgba(20,40,63,.10);
+  --shadow-lg:0 24px 60px -12px rgba(20,40,63,.34);
+  --lift:cubic-bezier(.34,1.28,.44,1);
   --r:14px; --r-lg:22px;
   --wrap:1180px;
 }
@@ -87,7 +91,7 @@ a{color:inherit}
 .btn-block{width:100%}
 
 /* ---------- utility bar + header ---------- */
-.util{background:var(--ink);color:#C9D4E4;font-size:.82rem;padding:9px 0}
+.util{background:var(--ink);color:#C9D9EC;font-size:.82rem;padding:9px 0}
 .util .wrap{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;text-align:center}
 .util b{color:#fff;font-weight:700}
 
@@ -115,9 +119,9 @@ header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.92);backdro
 .hero{
   position:relative;color:#fff;
   background:
-    radial-gradient(1100px 620px at 82% -12%,rgba(233,180,76,.16),transparent 62%),
-    radial-gradient(760px 520px at 4% 105%,rgba(18,135,90,.16),transparent 60%),
-    linear-gradient(168deg,var(--ink) 0%,var(--ink-2) 58%,#152845 100%);
+    radial-gradient(1100px 620px at 82% -12%,rgba(233,180,76,.20),transparent 62%),
+    radial-gradient(880px 560px at 2% 104%,rgba(127,188,236,.22),transparent 62%),
+    linear-gradient(165deg,var(--ink) 0%,var(--ink-2) 52%,var(--ink-3) 100%);
   overflow:hidden;
 }
 .hero::after{
@@ -128,29 +132,39 @@ header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.92);backdro
 .hero-grid{
   position:relative;z-index:2;display:grid;grid-template-columns:1.06fr .94fr;
   grid-template-areas:"copy form" "extra form";
-  column-gap:56px;row-gap:30px;align-items:start;padding:70px 0 84px;
+  column-gap:56px;row-gap:30px;align-items:start;padding:70px 0 44px;
 }
 .hero-copy{grid-area:copy}
 .hero-extra{grid-area:extra}
 .card-form{grid-area:form}
 .hero h1{color:#fff;margin-bottom:20px}
 .hero h1 em{font-style:normal;color:var(--gold);display:block;font-size:.6em;line-height:1.2;margin-top:.42em;letter-spacing:-.02em}
-.hero-sub{font-size:clamp(1.04rem,1.55vw,1.22rem);color:#C6D3E6;max-width:40ch;margin-bottom:26px}
+.hero-sub{font-size:clamp(1.04rem,1.55vw,1.22rem);color:#CFE0F2;max-width:40ch;margin-bottom:26px}
 .hero-sub strong{color:#fff;font-weight:700}
 .hero-chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:30px}
 .chip{
   display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.16);padding:8px 14px;border-radius:999px;
-  font-size:.86rem;font-weight:700;color:#EAF1FA;
+  font-size:.86rem;font-weight:700;color:#EEF5FC;
 }
 .chip svg{width:14px;height:14px;color:var(--gold);flex:0 0 auto}
 .hero-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
-.hero-note{font-size:.9rem;color:#93A5BE;display:flex;align-items:center;gap:9px}
+.hero-note{font-size:.9rem;color:#9FB7D2;display:flex;align-items:center;gap:9px}
 
-.counties{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+/* full-width coverage strip */
+.coverage{
+  position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.11);
+  padding:22px 0 38px;
+}
+.coverage-label{
+  display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:13px;
+}
+.counties{display:flex;flex-wrap:wrap;gap:5px}
 .county{
-  font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-  color:#9DB0CB;border:1px solid rgba(255,255,255,.14);padding:6px 12px;border-radius:8px;
+  font-size:.655rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:#A9C1DB;border:1px solid rgba(255,255,255,.14);padding:4px 9px;border-radius:6px;
+  white-space:nowrap;line-height:1.4;
 }
 
 /* ---------- form card ---------- */
@@ -224,7 +238,7 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 
 /* ---------- proof strip ---------- */
 .proof{background:var(--mist);border-bottom:1px solid var(--line)}
-.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
 .proof-cell{background:var(--mist);padding:26px 20px;text-align:center}
 .proof-cell svg{width:24px;height:24px;color:var(--gold-2);margin:0 auto 10px}
 .proof-cell b{display:block;font-size:1rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
@@ -236,13 +250,12 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:box-shadow .2s,transform .2s}
-.card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
 .card h3{margin-bottom:8px}
 .card p{color:var(--muted);font-size:.97rem;margin:0}
 
 /* ---------- guarantees ---------- */
-.guar{background:var(--ink);color:#fff}
-.guar .lede{color:#B7C6DC}
+.guar{background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff}
+.guar .lede{color:#C2D5EA}
 .guar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
 .guar-card{
   background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
@@ -253,7 +266,7 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
   margin-bottom:12px;display:block;
 }
 .guar-card h3{color:#fff;font-size:1.28rem;margin-bottom:9px}
-.guar-card p{color:#B7C6DC;font-size:.96rem;margin:0}
+.guar-card p{color:#C2D5EA;font-size:.96rem;margin:0}
 .guar-card p strong{color:#fff}
 
 /* ---------- steps ---------- */
@@ -304,7 +317,7 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 .co-net b{font-size:1.85rem;font-weight:800;letter-spacing:-.04em}
 .co.win .co-net b{color:#6B4A08}
 .calc-foot{
-  background:var(--ink);color:#C6D3E6;border-radius:var(--r);padding:20px 24px;font-size:.94rem;
+  background:linear-gradient(150deg,var(--ink),var(--ink-2));color:#CFE0F0;border-radius:var(--r);padding:20px 24px;font-size:.94rem;
 }
 .calc-foot b{color:var(--gold)}
 .calc-note{font-size:.82rem;color:var(--faint);margin-top:14px}
@@ -333,27 +346,52 @@ tbody tr:last-child td{border-bottom:0}
   display:flex;align-items:center;gap:11px;padding:16px 18px;background:#fff;
   border:1px solid var(--line);border-radius:11px;font-weight:700;font-size:.95rem;transition:all .15s;
 }
-.sit:hover{border-color:var(--gold);background:var(--gold-soft)}
 .sit svg{width:17px;height:17px;color:var(--gold-2);flex:0 0 auto}
 .sit.star{border-color:var(--gold);background:var(--gold-soft)}
 
 /* ---------- probate ---------- */
-.probate{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.probate{background:linear-gradient(160deg,var(--ink-2) 0%,var(--ink) 60%,var(--ink-2) 100%);color:#fff;position:relative;overflow:hidden}
 .probate::before{
   content:"";position:absolute;top:-160px;right:-160px;width:520px;height:520px;border-radius:50%;
   background:radial-gradient(circle,rgba(233,180,76,.13),transparent 68%);
 }
 .probate-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:52px;align-items:start;position:relative;z-index:1}
 .probate h2{color:#fff}
-.probate .lede{color:#B7C6DC}
+.probate .lede{color:#C2D5EA}
 .pq{display:grid;gap:14px}
 .pq-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:22px 24px}
 .pq-item h3{color:var(--gold);font-size:1.04rem;margin-bottom:7px;letter-spacing:-.01em}
-.pq-item p{color:#C6D3E6;font-size:.96rem;margin:0}
+.pq-item p{color:#CFE0F2;font-size:.96rem;margin:0}
 .pq-item p strong{color:#fff}
 
+/* probate arm link-out */
+.pae-link{
+  display:flex;align-items:center;gap:16px;margin-top:26px;text-decoration:none;color:inherit;
+  background:linear-gradient(135deg,rgba(127,188,236,.18),rgba(255,255,255,.05));
+  border:1px solid rgba(127,188,236,.38);border-radius:var(--r);padding:18px 20px;
+  transition:transform .18s var(--lift),border-color .18s,background .18s,box-shadow .18s;
+}
+.pae-link:hover{
+  transform:translateY(-4px);border-color:var(--sky);
+  background:linear-gradient(135deg,rgba(127,188,236,.30),rgba(255,255,255,.08));
+  box-shadow:0 16px 36px -10px rgba(0,0,0,.5);
+}
+.pae-badge{
+  flex:0 0 auto;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);background:var(--sky);padding:6px 10px;border-radius:6px;
+}
+.pae-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pae-body b{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:#fff}
+.pae-body span{font-size:.9rem;color:#C2D5EA}
+.pae-arrow{width:22px;height:22px;flex:0 0 auto;margin-left:auto;color:var(--sky);transition:transform .18s var(--lift)}
+.pae-link:hover .pae-arrow{transform:translateX(5px)}
+@media (max-width:520px){
+  .pae-link{flex-wrap:wrap;gap:12px}
+  .pae-arrow{margin-left:0}
+}
+
 /* ---------- founder ---------- */
-.founder{display:grid;grid-template-columns:.7fr 1.3fr;gap:44px;align-items:center}
+.founder{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
 .founder-photo{
   aspect-ratio:1;border-radius:var(--r-lg);background:var(--mist);border:1px solid var(--line);
   display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:var(--shadow);
@@ -402,26 +440,27 @@ details .ans p:last-child{margin-bottom:0}
 /* ---------- final cta ---------- */
 .final{
   background:
-    radial-gradient(800px 480px at 78% 8%,rgba(233,180,76,.18),transparent 62%),
-    linear-gradient(160deg,var(--ink),var(--ink-2));
+    radial-gradient(800px 480px at 78% 8%,rgba(233,180,76,.22),transparent 62%),
+    radial-gradient(700px 460px at 6% 100%,rgba(127,188,236,.20),transparent 60%),
+    linear-gradient(160deg,var(--ink),var(--ink-3));
   color:#fff;text-align:center;
 }
 .final h2{color:#fff;max-width:20ch;margin:0 auto .55em}
-.final .lede{color:#B7C6DC;margin:0 auto 30px}
+.final .lede{color:#C2D5EA;margin:0 auto 30px}
 .final-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .final .btn{min-width:250px}
 
 /* ---------- footer ---------- */
-footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
+footer{background:#0E1E31;color:#9BB2CD;font-size:.9rem;padding:56px 0 130px}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:38px;margin-bottom:36px}
 .foot-grid h4{color:#fff;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px}
-.foot-grid a{color:#8FA3BF;text-decoration:none;display:block;margin-bottom:8px}
+.foot-grid a{color:#9BB2CD;text-decoration:none;display:block;margin-bottom:8px}
 .foot-grid a:hover{color:var(--gold)}
 .foot-logo{display:flex;align-items:center;gap:11px;margin-bottom:14px}
 .foot-logo .logo-txt b{color:#fff}
-.foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:.8rem;line-height:1.7;color:#647893}
+.foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:.8rem;line-height:1.7;color:#7C93B0}
 .foot-bot p{margin-bottom:10px}
-.areas{font-size:.82rem;line-height:1.9;color:#647893}
+.areas{font-size:.82rem;line-height:1.9;color:#7C93B0}
 
 /* ---------- sticky mobile bar ---------- */
 .sticky{
@@ -435,16 +474,123 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
 .skip:focus{left:0;top:0}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
 
+
+/* ===================== GLOBAL HOVER SYSTEM ===================== */
+/* everything the cursor crosses lifts and lights up */
+.card,.guar-card,.sit,.proof-cell,.county,.chip,.co,.step,.pq-item,
+details,.calc-in,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
+.coverage .county,tbody tr{
+  transition:transform .18s var(--lift),box-shadow .18s ease,
+             border-color .18s ease,background .18s ease,color .18s ease;
+}
+
+/* --- light cards on white --- */
+.card:hover,.co:hover,.calc-in:hover{
+  transform:translateY(-4px);
+  border-color:var(--ink-3);
+  box-shadow:var(--shadow-hover);
+}
+.co.win:hover{border-color:var(--gold-2)}
+
+/* --- situation chips --- */
+.sit:hover{
+  transform:translateY(-3px) scale(1.02);
+  border-color:var(--ink-3);
+  background:var(--sky-soft);
+  box-shadow:var(--shadow-hover);
+}
+.sit:hover svg{color:var(--ink-3)}
+
+/* --- proof strip --- */
+.proof-cell{cursor:default}
+.proof-cell:hover{
+  transform:translateY(-3px);
+  background:#fff;
+  box-shadow:var(--shadow-hover);
+  border-radius:var(--r);
+}
+.proof-cell:hover svg{color:var(--ink-3)}
+
+/* --- steps --- */
+.step:hover{transform:translateY(-3px)}
+.step:hover::before{color:var(--sky-soft)}
+.step:hover .step-time{background:var(--ink);color:var(--gold)}
+
+/* --- dark-surface cards --- */
+.guar-card:hover,.pq-item:hover{
+  transform:translateY(-4px);
+  border-color:var(--sky);
+  background:linear-gradient(160deg,rgba(127,188,236,.16),rgba(255,255,255,.05));
+  box-shadow:0 16px 36px -10px rgba(0,0,0,.45);
+}
+.guar-card:hover h3{color:var(--gold)}
+
+/* --- hero chips + city chips --- */
+.chip:hover{
+  transform:translateY(-2px);
+  background:rgba(127,188,236,.20);
+  border-color:var(--sky);
+}
+.county:hover{
+  transform:translateY(-2px) scale(1.04);
+  color:#fff;
+  border-color:var(--sky);
+  background:rgba(127,188,236,.18);
+  box-shadow:0 6px 14px -4px rgba(0,0,0,.4);
+}
+
+/* --- FAQ --- */
+details:hover{border-color:var(--ink-3);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+summary:hover{color:var(--ink-3)}
+details:hover summary::after{border-color:var(--ink-3)}
+
+/* --- table rows --- */
+tbody tr:hover{background:var(--sky-soft)}
+tbody tr:hover td.us{background:#F6E8C6}
+
+/* --- callout blocks --- */
+.honest:hover,.refs:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+
+/* --- founder photo --- */
+.founder-photo:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-lg)}
+
+/* --- buttons lift --- */
+.btn:hover{transform:translateY(-2px)}
+.btn-gold:hover{box-shadow:0 10px 26px rgba(233,180,76,.50)}
+.btn-ink:hover{box-shadow:0 10px 26px rgba(20,40,63,.34)}
+.nav-phone:hover{transform:translateY(-2px);border-color:var(--ink-3);color:var(--ink-3);box-shadow:var(--shadow-hover)}
+.logo:hover{transform:translateY(-1px)}
+.logo:hover .logo-mark{background:var(--ink-3)}
+
+/* --- nav + footer links --- */
+.nav-links a{transition:color .16s ease,transform .16s var(--lift);display:inline-block}
+.nav-links a:hover{color:var(--ink-3);transform:translateY(-2px)}
+.foot-grid a{transition:color .16s ease,transform .16s var(--lift)}
+.foot-grid a:hover{color:var(--gold);transform:translateX(3px)}
+.cf-alt a:hover,.calc-call:hover{color:var(--ink-3)}
+
+/* --- form options --- */
+.opt span{transition:all .16s var(--lift)}
+.opt span:hover{border-color:var(--ink-3);background:var(--sky-soft);transform:translateY(-2px)}
+.opt input:checked + span:hover{background:var(--ink-3);border-color:var(--ink-3)}
+
+@media (hover:none){
+  .card:hover,.co:hover,.sit:hover,.proof-cell:hover,.step:hover,.guar-card:hover,
+  .pq-item:hover,.chip:hover,.county:hover,details:hover,.honest:hover,.refs:hover,
+  .founder-photo:hover,.btn:hover,.nav-phone:hover,.calc-in:hover{transform:none}
+}
+/* ============================================================ */
+
 /* ---------- responsive ---------- */
 @media (max-width:1020px){
-  .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "form" "extra";row-gap:34px;padding:52px 0 64px}
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "form" "extra";row-gap:34px;padding:52px 0 34px}
   .hero-sub{max-width:52ch}
   .nav-links{display:none}
   .probate-grid,.calc,.founder{grid-template-columns:1fr;gap:32px}
   .proof-grid{grid-template-columns:repeat(2,1fr)}
   .sits{grid-template-columns:repeat(2,1fr)}
   .g4{grid-template-columns:repeat(2,1fr)}
-  .founder-photo{max-width:300px}
+  .founder-photo{max-width:340px}
 }
 @media (max-width:760px){
   body{font-size:16px}
@@ -459,11 +605,20 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
   .logo-mark{width:36px;height:36px;border-radius:10px}
   .logo-txt b{font-size:.9rem}
   .logo-txt span{font-size:.58rem;letter-spacing:.08em}
-  .hero-grid{padding:36px 0 52px;row-gap:26px}
+  .hero-grid{padding:36px 0 26px;row-gap:26px}
   .hero-sub{margin-bottom:20px}
   .hero-chips{gap:7px;margin-bottom:0}
   .chip{font-size:.79rem;padding:7px 11px}
   .hero-cta-row .btn:first-child{display:none}
+  .coverage{padding:20px 0 28px}
+  .coverage-label{margin-bottom:11px}
+  .counties{
+    flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;margin:0 -20px;padding:2px 20px;
+    -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,#000 88%,transparent);
+  }
+  .counties::-webkit-scrollbar{display:none}
   .steps,.guar-grid,.g3,.g2,.quotes{grid-template-columns:1fr}
   .fld-row{grid-template-columns:1fr}
   .sticky{display:flex}
@@ -543,21 +698,6 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
         </div>
 
         <p class="hero-note"><span class="dot"></span> Real people answering the phone in South Florida. Not a call center.</p>
-
-        <div class="counties">
-          <span class="county">Miami</span><span class="county">Hialeah</span><span class="county">Miami Gardens</span>
-          <span class="county">Homestead</span><span class="county">North Miami</span><span class="county">Kendall</span>
-          <span class="county">Doral</span><span class="county">Cutler Bay</span><span class="county">Opa-locka</span>
-          <span class="county">Miami Beach</span><span class="county">Coral Gables</span><span class="county">Little Haiti</span>
-          <span class="county">Fort Lauderdale</span><span class="county">Hollywood</span><span class="county">Pembroke Pines</span>
-          <span class="county">Miramar</span><span class="county">Coral Springs</span><span class="county">Pompano Beach</span>
-          <span class="county">Davie</span><span class="county">Plantation</span><span class="county">Sunrise</span>
-          <span class="county">Tamarac</span><span class="county">Lauderhill</span><span class="county">Deerfield Beach</span>
-          <span class="county">West Palm Beach</span><span class="county">Boca Raton</span><span class="county">Delray Beach</span>
-          <span class="county">Boynton Beach</span><span class="county">Lake Worth</span><span class="county">Riviera Beach</span>
-          <span class="county">Jupiter</span><span class="county">Wellington</span><span class="county">Palm Beach Gardens</span>
-          <span class="county">Greenacres</span>
-        </div>
       </div>
 
       <!-- ============ MULTI-STEP FORM ============ -->
@@ -686,6 +826,12 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
         </div>
       </div>
     </div>
+
+    <!-- full-width coverage strip -->
+    <div class="coverage">
+      <span class="coverage-label">Buying right now in</span>
+      <div class="counties"><span class="county">Miami</span><span class="county">Hialeah</span><span class="county">Miami Gardens</span><span class="county">Homestead</span><span class="county">North Miami</span><span class="county">Kendall</span><span class="county">Doral</span><span class="county">Cutler Bay</span><span class="county">Opa-locka</span><span class="county">Miami Beach</span><span class="county">Coral Gables</span><span class="county">Little Haiti</span><span class="county">Fort Lauderdale</span><span class="county">Hollywood</span><span class="county">Pembroke Pines</span><span class="county">Miramar</span><span class="county">Coral Springs</span><span class="county">Pompano Beach</span><span class="county">Davie</span><span class="county">Plantation</span><span class="county">Sunrise</span><span class="county">Tamarac</span><span class="county">Lauderhill</span><span class="county">Deerfield Beach</span><span class="county">West Palm Beach</span><span class="county">Boca Raton</span><span class="county">Delray Beach</span><span class="county">Boynton Beach</span><span class="county">Lake Worth</span><span class="county">Riviera Beach</span><span class="county">Jupiter</span><span class="county">Wellington</span><span class="county">Palm Beach Gardens</span></div>
+    </div>
   </div>
 </section>
 
@@ -699,19 +845,14 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
         <span>We live and buy here. You talk to the person writing the check.</span>
       </div>
       <div class="proof-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.6"/><path d="M6 10v5M18 10v5"/></svg>
-        <b>Our own funds</b>
-        <span>Proof of funds on request before you sign anything.</span>
-      </div>
-      <div class="proof-cell">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
         <b>Licensed title closings</b>
         <span>Every deal closes at a licensed South Florida title company.</span>
       </div>
       <div class="proof-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-        <b>Probate is our specialty</b>
-        <span>Inherited homes and estates are what we do every single day.</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <b>Zero fees, zero commissions</b>
+        <span>We pay the closing costs. Nothing comes out of your pocket.</span>
       </div>
     </div>
   </div>
@@ -797,7 +938,6 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
 <section class="sec" id="calculator">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">Run your own numbers</span>
       <h2>What would you actually keep?</h2>
       <p class="lede">Everybody compares the sale price. Almost nobody compares what lands in their bank account. Move the numbers and see for yourself.</p>
     </div>
@@ -910,8 +1050,8 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
     </div>
 
     <div class="sits">
-      <div class="sit star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Inherited or probate</div>
-      <div class="sit star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Estate with multiple heirs</div>
+      <div class="sit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Inherited or probate</div>
+      <div class="sit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Estate with multiple heirs</div>
       <div class="sit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Foreclosure or auction date</div>
       <div class="sit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Behind on payments</div>
       <div class="sit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Code violations or liens</div>
@@ -936,10 +1076,20 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
     <div class="probate-grid">
       <div>
         <span class="eyebrow">Inherited &amp; probate homes</span>
-        <h2>You did not ask for this house.</h2>
-        <p class="lede">Somebody died and now there is a property, a court process, and probably a sibling with a different opinion. This is the part of the business we know best, and it is why Probate Assets Elite exists.</p>
+        <h2>This isn't your house, is it?</h2>
+        <p class="lede">Somebody passed away. Now there is a property, a court process, and probably a sibling with a different opinion about what to do with it. You did not ask for any of this.</p>
         <p class="lede">You can start before probate is finished. You do not have to clean it out. And you do not have to pay a lawyer up front to get moving.</p>
-        <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+
+        <a class="pae-link" href="https://jeffinvest007.github.io/probate-assets-elite/" target="_blank" rel="noopener">
+          <span class="pae-badge">Our probate arm</span>
+          <span class="pae-body">
+            <b>Go to Probate Assets Elite</b>
+            <span>Everything on Florida probate, estates and heirs, in one place.</span>
+          </span>
+          <svg class="pae-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn btn-gold" href="#offer-form">Talk to us about the estate</a>
           <a class="btn btn-ghost-light" href="tel:+17869207419" data-track="call-probate">Call (786) 920-7419</a>
         </div>
@@ -1092,8 +1242,8 @@ footer{background:#070E19;color:#8FA3BF;font-size:.9rem;padding:56px 0 130px}
     </div>
 
     <div class="foot-bot">
-      <p><strong style="color:#93A5BE">Privacy.</strong> We collect only what you give us on the form and we use it for one thing: contacting you about your property. We do not sell, rent, or share your information with third-party lead buyers. Ask us to delete your information at any time and we will.</p>
-      <p><strong style="color:#93A5BE">Disclosure.</strong> The Cash Home Offer is a real estate investment company operated by Probate Assets Elite LLC. We are not real estate agents and we do not list properties. We buy houses directly. Our offers are below full retail market value in exchange for speed, certainty, and paying all costs. Nothing on this page is legal, tax, or financial advice. Consult a licensed attorney or accountant about your specific situation. The calculator is an estimating tool only and does not constitute an offer. Timelines depend on title condition and probate status.</p>
+      <p><strong style="color:#9FB7D2">Privacy.</strong> We collect only what you give us on the form and we use it for one thing: contacting you about your property. We do not sell, rent, or share your information with third-party lead buyers. Ask us to delete your information at any time and we will.</p>
+      <p><strong style="color:#9FB7D2">Disclosure.</strong> The Cash Home Offer is a real estate investment company operated by Probate Assets Elite LLC. We are not real estate agents and we do not list properties. We buy houses directly. Our offers are below full retail market value in exchange for speed, certainty, and paying all costs. Nothing on this page is legal, tax, or financial advice. Consult a licensed attorney or accountant about your specific situation. The calculator is an estimating tool only and does not constitute an offer. Timelines depend on title condition and probate status.</p>
       <p>&copy; <span id="yr">2026</span> Probate Assets Elite LLC. All rights reserved. &nbsp;·&nbsp; Serving Miami-Dade, Broward &amp; Palm Beach County, Florida.</p>
     </div>
   </div>
