@@ -1905,7 +1905,7 @@ body.menu-open .sticky{display:none}
       slot.el.classList.toggle('warm', Math.random()<0.28);
       slot.busy=true;
 
-      var dur=780+Math.random()*720;
+      var dur=1700+Math.random()*1500;
       var peak=0.78+Math.random()*0.22;
       var anim=slot.el.animate(
         [{opacity:0},{opacity:peak,offset:0.14},{opacity:peak,offset:0.62},{opacity:0}],
@@ -1918,7 +1918,7 @@ body.menu-open .sticky{display:none}
     var timer=null;
     function tick(){
       light();
-      timer=setTimeout(tick, 185+Math.random()*265);
+      timer=setTimeout(tick, 430+Math.random()*620);
     }
     /* two lit right away, then a rolling random cadence */
     light(); setTimeout(light,140); tick();
