@@ -265,14 +265,6 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 .done-sms:hover{color:var(--ink-3)}
 .done .btn{margin-top:0}
 
-/* ---------- proof strip ---------- */
-.proof{background:var(--mist);border-bottom:1px solid var(--line)}
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
-.proof-cell{background:var(--mist);padding:26px 20px;text-align:center}
-.proof-cell svg{width:24px;height:24px;color:var(--gold-2);margin:0 auto 10px}
-.proof-cell b{display:block;font-size:1rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
-.proof-cell span{font-size:.86rem;color:var(--muted);display:block;line-height:1.45}
-
 /* ---------- generic cards ---------- */
 .grid{display:grid;gap:20px}
 .g2{grid-template-columns:repeat(2,1fr)}
@@ -536,7 +528,7 @@ footer{background:#0E1E31;color:#9BB2CD;font-size:.9rem;padding:56px 0 130px}
 
 /* ===================== GLOBAL HOVER SYSTEM ===================== */
 /* everything the cursor crosses lifts and lights up */
-.card,.guar-card,.sit,.proof-cell,.county,.chip,.co,.step,.pq-item,
+.card,.guar-card,.sit,.county,.chip,.step,.pq-item,
 details,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
 .coverage .county,tbody tr{
   transition:transform .18s var(--lift),box-shadow .18s ease,
@@ -558,16 +550,6 @@ details,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
   box-shadow:var(--shadow-hover);
 }
 .sit:hover svg{color:var(--ink-3)}
-
-/* --- proof strip --- */
-.proof-cell{cursor:default}
-.proof-cell:hover{
-  transform:translateY(-3px);
-  background:#fff;
-  box-shadow:var(--shadow-hover);
-  border-radius:var(--r);
-}
-.proof-cell:hover svg{color:var(--ink-3)}
 
 /* --- steps --- */
 .step:hover{transform:translateY(-3px)}
@@ -633,7 +615,7 @@ details:hover summary::after{border-color:var(--ink-3)}
 .opt input:checked + span:hover{background:var(--ink-3);border-color:var(--ink-3)}
 
 @media (hover:none){
-  .card:hover,.co:hover,.sit:hover,.proof-cell:hover,.step:hover,.guar-card:hover,
+  .card:hover,.sit:hover,.step:hover,.guar-card:hover,
   .pq-item:hover,.chip:hover,.county:hover,details:hover,.honest:hover,.refs:hover,
   .founder-photo:hover,.btn:hover,.nav-phone:hover{transform:none}
 }
@@ -739,7 +721,6 @@ body.menu-open .sticky{display:none}
   .hero-sub{max-width:52ch}
   .nav-links{display:none}
   .probate-grid,.calc,.founder{grid-template-columns:1fr;gap:32px}
-  .proof-grid{grid-template-columns:repeat(2,1fr)}
   .sits{grid-template-columns:repeat(2,1fr)}
   .g4{grid-template-columns:repeat(2,1fr)}
   .founder-photo{max-width:340px}
@@ -1063,24 +1044,30 @@ body.menu-open .sticky{display:none}
   </div>
 </section>
 
-<!-- ================= PROOF STRIP ================= -->
-<section class="proof">
+<!-- ================= HOW IT WORKS ================= -->
+<section class="sec" id="how">
   <div class="wrap">
-    <div class="proof-grid">
-      <div class="proof-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <b>Local, not a call center</b>
-        <span>We live and buy here. You talk to the person making the offer.</span>
+    <div class="center">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. Real timelines.</h2>
+      <p class="lede">No showings. No open houses. No strangers walking through your kitchen on a Sunday afternoon.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-time">60 seconds</span>
+        <h3>Tell us about the house</h3>
+        <p>Fill out the form or call us. We ask for the address, rough condition, and how fast you need to move. That is it. No 40-question interrogation.</p>
       </div>
-      <div class="proof-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
-        <b>Licensed title closings</b>
-        <span>Every deal closes at a licensed South Florida title company.</span>
+      <div class="step">
+        <span class="step-time">Within 24 hours</span>
+        <h3>We run your numbers and call</h3>
+        <p>We pull comps, estimate repairs, and walk you through exactly how we got to the number. You get it in writing. Ask us anything. There is no obligation and no pressure.</p>
       </div>
-      <div class="proof-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <b>Zero fees, zero commissions</b>
-        <span>We pay the closing costs. Nothing comes out of your pocket.</span>
+      <div class="step">
+        <span class="step-time">As fast as 7 days</span>
+        <h3>You pick the closing date</h3>
+        <p>Close at a licensed South Florida title company on the day you choose. Funds wired same or next business day. Need 60 days instead of 7? That works too.</p>
       </div>
     </div>
   </div>
@@ -1110,35 +1097,6 @@ body.menu-open .sticky{display:none}
         <span class="guar-num">PROMISE 03</span>
         <h3>The straight answer</h3>
         <p>If listing with an agent would put more money in your pocket, <strong>we will tell you and explain why</strong>. We would rather lose a deal than waste your time. Some houses should be listed. We will say so.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HOW IT WORKS ================= -->
-<section class="sec" id="how">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">How it works</span>
-      <h2>Three steps. Real timelines.</h2>
-      <p class="lede">No showings. No open houses. No strangers walking through your kitchen on a Sunday afternoon.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <span class="step-time">60 seconds</span>
-        <h3>Tell us about the house</h3>
-        <p>Fill out the form or call us. We ask for the address, rough condition, and how fast you need to move. That is it. No 40-question interrogation.</p>
-      </div>
-      <div class="step">
-        <span class="step-time">Within 24 hours</span>
-        <h3>We run your numbers and call</h3>
-        <p>We pull comps, estimate repairs, and walk you through exactly how we got to the number. You get it in writing. Ask us anything. There is no obligation and no pressure.</p>
-      </div>
-      <div class="step">
-        <span class="step-time">As fast as 7 days</span>
-        <h3>You pick the closing date</h3>
-        <p>Close at a licensed South Florida title company on the day you choose. Funds wired same or next business day. Need 60 days instead of 7? That works too.</p>
       </div>
     </div>
   </div>
