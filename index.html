@@ -837,28 +837,26 @@ body.menu-open .sticky{display:none}
 /* ================= [MAP-FEATURE] city chip -> tri-county map popover ================= */
 #cityMap{
   position:fixed;left:0;top:0;z-index:130;pointer-events:none;
-  width:174px;padding:11px 12px 10px;border-radius:14px;
-  background:#fff;border:1px solid var(--line);
-  box-shadow:0 22px 48px -12px rgba(8,20,35,.55),0 4px 12px rgba(8,20,35,.28);
+  width:140px;padding:0;
+  background:none;border:0;box-shadow:none;
   opacity:0;transform:translateY(7px) scale(.93);transform-origin:50% 100%;
   transition:opacity .15s ease,transform .19s var(--lift);
   will-change:transform,opacity;
+  --cm-halo:0 1px 2px rgba(4,12,22,.95),0 0 9px rgba(4,12,22,.85),0 0 18px rgba(4,12,22,.6);
 }
 #cityMap.on{opacity:1;transform:translateY(0) scale(1)}
-#cityMap .cm-name{
-  font-size:.715rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--ink);line-height:1.25;text-align:center;
+#cityMap svg{
+  display:block;width:100%;height:auto;
+  filter:drop-shadow(0 0 1.2px rgba(6,16,28,.95)) drop-shadow(0 0 2.4px rgba(6,16,28,.9))
+         drop-shadow(0 0 5px rgba(6,16,28,.6)) drop-shadow(0 4px 11px rgba(4,12,22,.55));
 }
-#cityMap .cm-zip{display:block;color:var(--gold-2);font-size:.66rem;letter-spacing:.12em;margin-top:2px}
-#cityMap svg{display:block;width:100%;height:auto;margin:8px 0 7px}
-#cityMap .cm-county{
-  font-size:.585rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
-  color:var(--faint);text-align:center;
+#cityMap .cm-co{
+  fill:rgba(228,240,253,.13);stroke:rgba(220,236,253,.72);
+  stroke-width:4;stroke-linejoin:round;
 }
-#cityMap .cm-co{fill:#E3EBF4;stroke:#AFC6DC;stroke-width:3.5;stroke-linejoin:round}
-#cityMap .cm-co.hit{fill:#FAE7BE;stroke:var(--gold-2);stroke-width:6}
-#cityMap .cm-ring{fill:none;stroke:var(--gold-2);stroke-width:8}
-#cityMap .cm-dot{fill:var(--gold);stroke:var(--ink);stroke-width:6;paint-order:stroke}
+#cityMap .cm-co.hit{fill:rgba(233,180,76,.70);stroke:var(--gold);stroke-width:8}
+#cityMap .cm-ring{fill:none;stroke:var(--gold);stroke-width:9}
+#cityMap .cm-dot{fill:var(--gold);stroke:#0B1B2E;stroke-width:7;paint-order:stroke}
 @media (prefers-reduced-motion:reduce){#cityMap .cm-ring{display:none}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
@@ -1817,8 +1815,7 @@ body.menu-open .sticky{display:none}
     box.id='cityMap';
     box.setAttribute('aria-hidden','true');
     box.innerHTML=
-      '<div class="cm-name"><span id="cmCity"></span> <span class="cm-zip" id="cmZip"></span></div>'+
-      '<svg id="cmSvg" viewBox="-32 -40 483 1080" width="150" height="335" aria-hidden="true" focusable="false">'+
+      '<svg id="cmSvg" viewBox="-32 -40 483 1080" width="140" height="313" aria-hidden="true" focusable="false">'+
         '<path class="cm-co" id="cm-palm" d="'+D.palm+'"/>'+
         '<path class="cm-co" id="cm-broward" d="'+D.broward+'"/>'+
         '<path class="cm-co" id="cm-dade" d="'+D.dade+'"/>'+
@@ -1827,22 +1824,22 @@ body.menu-open .sticky{display:none}
           '<animate attributeName="opacity" values="1;0" dur="1.7s" repeatCount="indefinite"/>'+
         '</circle>'+
         '<circle class="cm-dot" id="cmDot" cx="-99" cy="-99" r="24"/>'+
-      '</svg>'+
-      '<div class="cm-county" id="cmCounty"></div>';
+      '</svg>';
     document.body.appendChild(box);
 
     var svg=box.querySelector('#cmSvg'), ring=box.querySelector('#cmRing'),
-        dot=box.querySelector('#cmDot'), elCity=box.querySelector('#cmCity'),
-        elZip=box.querySelector('#cmZip'), elCo=box.querySelector('#cmCounty');
-    var W=174, cur=null, hideT=null;
+        dot=box.querySelector('#cmDot');
+    var W=140, cur=null, hideT=null;
 
     function place(chip){
       var r=chip.getBoundingClientRect();
       var H=box.offsetHeight||420;
       var vw=document.documentElement.clientWidth||window.innerWidth;
       var vh=window.innerHeight||document.documentElement.clientHeight;
+      var head=document.querySelector('header');
+      var top0=head?Math.max(8,head.getBoundingClientRect().bottom+6):8;
       var cx=r.left+r.width/2, x, y, org;
-      if(r.top-H-12>=8){                 /* above the chip: the default */
+      if(r.top-H-12>=top0){              /* above the chip: the default */
         y=r.top-H-12; org='50% 100%';
         x=cx-W/2;
       } else if(r.bottom+12+H<=vh-8){    /* below the chip */
@@ -1859,8 +1856,9 @@ body.menu-open .sticky{display:none}
       }
       if(x<10) x=10;
       if(x>vw-W-10) x=Math.max(10,vw-W-10);
-      if(y<8) y=8;
-      if(y+H>vh-8) y=Math.max(8,vh-H-8);
+      if(y+H>vh-8) y=vh-H-8;
+      if(y<top0) y=top0;
+      box.dataset.pos=org;
       box.style.transformOrigin=org;
       box.style.left=Math.round(x)+'px';
       box.style.top=Math.round(y)+'px';
@@ -1871,9 +1869,6 @@ body.menu-open .sticky{display:none}
       var p=PTS[chip.dataset.city];
       if(!p){ return; }
       cur=chip;
-      elCity.textContent=chip.dataset.city;
-      elZip.textContent=chip.dataset.zip;
-      elCo.textContent=NAME[p[2]];
       ['dade','broward','palm'].forEach(function(k){
         box.querySelector('#cm-'+k).setAttribute('class','cm-co');
       });
