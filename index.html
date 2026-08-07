@@ -294,38 +294,39 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 .honest p + p{margin-top:12px}
 .honest strong{color:var(--text)}
 
-/* ---------- calculator ---------- */
-.calc{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;margin-top:36px;align-items:start}
-.calc-in{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
-.calc-in .fld{margin-bottom:18px}
-.calc-in .fld:last-child{margin-bottom:0}
-.money{position:relative}
-.money::before{content:"$";position:absolute;left:15px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--faint);pointer-events:none}
-.money input{padding-left:30px}
-.calc-out{display:grid;gap:16px}
-.co{border-radius:var(--r-lg);padding:26px;border:1px solid var(--line);background:#fff}
-.co.win{border-color:var(--gold);background:var(--gold-soft);box-shadow:var(--shadow)}
-.co-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.co-top h3{margin:0;font-size:1.16rem}
-.co-time{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.co-rows{display:grid;gap:8px;font-size:.94rem;margin-bottom:16px}
-.co-row{display:flex;justify-content:space-between;gap:14px;color:var(--muted)}
-.co-row b{color:var(--text);font-weight:700;white-space:nowrap}
-.co-row.neg b{color:var(--red)}
-.co-net{border-top:1.5px solid rgba(16,24,40,.12);padding-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.co-net span{font-weight:800;font-size:.95rem}
-.co-net b{font-size:1.85rem;font-weight:800;letter-spacing:-.04em}
-.co.win .co-net b{color:#6B4A08}
-.calc-foot{
-  background:linear-gradient(150deg,var(--ink),var(--ink-2));color:#CFE0F0;border-radius:var(--r);padding:20px 24px;font-size:.94rem;
+
+/* city chip -> ZIP on hover */
+.county{text-align:center;transition:transform .18s var(--lift),box-shadow .18s ease,border-color .18s ease,background .18s ease,color .18s ease}
+.county.is-zip{color:var(--gold);border-color:var(--gold);background:rgba(233,180,76,.16);letter-spacing:.1em}
+
+/* comparison table: traffic-light on row hover */
+table tbody tr:hover td:nth-child(2),
+table tbody tr:hover td.us{background:#DFF3E8;color:#0A5B3B;box-shadow:inset 3px 0 0 #12875A}
+table tbody tr:hover td:nth-child(2) .tick{color:#0A5B3B}
+table tbody tr:hover td:nth-child(3){background:#FBEFCB;color:#6E4A08;box-shadow:inset 3px 0 0 #E0A81E}
+table tbody tr:hover td:nth-child(4){background:#FADFD9;color:#8A2D1E;box-shadow:inset 3px 0 0 #C4472F}
+table tbody tr:hover td:nth-child(4) .cross{color:#8A2D1E}
+table tbody tr:hover td:first-child{background:var(--ink);color:#fff}
+table tbody td{transition:background .16s ease,color .16s ease,box-shadow .16s ease}
+
+/* ticker */
+.ticker{
+  overflow:hidden;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.20);margin:34px 0 0;padding:14px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
 }
-.calc-foot b{color:var(--gold)}
-.calc-note{font-size:.82rem;color:var(--faint);margin-top:14px}
-.calc-cta{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
-.calc-cta h3{font-size:1.08rem;margin-bottom:7px}
-.calc-cta p{font-size:.92rem;color:var(--muted);margin-bottom:16px}
-.calc-call{display:block;text-align:center;margin-top:11px;font-weight:800;font-size:.94rem;color:var(--muted);text-decoration:none}
-.calc-call:hover{color:var(--ink)}
+.ticker-track{display:flex;width:max-content;animation:tape 26s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:14px;padding:0 28px;white-space:nowrap;
+  font-weight:800;font-size:clamp(.92rem,1.4vw,1.08rem);letter-spacing:-.01em;color:#fff;
+}
+.ticker-item i{font-style:normal;color:var(--gold);font-size:1.1em;line-height:1}
+@keyframes tape{ from{transform:translateX(-50%)} to{transform:translateX(0)} }
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none;width:100%;justify-content:center;flex-wrap:wrap}
+}
 
 /* ---------- table ---------- */
 .tbl-scroll{overflow-x:auto;margin-top:36px;-webkit-overflow-scrolling:touch;border-radius:var(--r-lg);border:1px solid var(--line)}
@@ -439,6 +440,7 @@ details .ans p:last-child{margin-bottom:0}
 
 /* ---------- final cta ---------- */
 .final{
+  padding-bottom:0;
   background:
     radial-gradient(800px 480px at 78% 8%,rgba(233,180,76,.22),transparent 62%),
     radial-gradient(700px 460px at 6% 100%,rgba(127,188,236,.20),transparent 60%),
@@ -478,19 +480,18 @@ footer{background:#0E1E31;color:#9BB2CD;font-size:.9rem;padding:56px 0 130px}
 /* ===================== GLOBAL HOVER SYSTEM ===================== */
 /* everything the cursor crosses lifts and lights up */
 .card,.guar-card,.sit,.proof-cell,.county,.chip,.co,.step,.pq-item,
-details,.calc-in,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
+details,.honest,.refs,.founder-photo,.nav-phone,.btn,.logo,
 .coverage .county,tbody tr{
   transition:transform .18s var(--lift),box-shadow .18s ease,
              border-color .18s ease,background .18s ease,color .18s ease;
 }
 
 /* --- light cards on white --- */
-.card:hover,.co:hover,.calc-in:hover{
+.card:hover{
   transform:translateY(-4px);
   border-color:var(--ink-3);
   box-shadow:var(--shadow-hover);
 }
-.co.win:hover{border-color:var(--gold-2)}
 
 /* --- situation chips --- */
 .sit:hover{
@@ -545,8 +546,6 @@ summary:hover{color:var(--ink-3)}
 details:hover summary::after{border-color:var(--ink-3)}
 
 /* --- table rows --- */
-tbody tr:hover{background:var(--sky-soft)}
-tbody tr:hover td.us{background:#F6E8C6}
 
 /* --- callout blocks --- */
 .honest:hover,.refs:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
@@ -567,7 +566,7 @@ tbody tr:hover td.us{background:#F6E8C6}
 .nav-links a:hover{color:var(--ink-3);transform:translateY(-2px)}
 .foot-grid a{transition:color .16s ease,transform .16s var(--lift)}
 .foot-grid a:hover{color:var(--gold);transform:translateX(3px)}
-.cf-alt a:hover,.calc-call:hover{color:var(--ink-3)}
+.cf-alt a:hover{color:var(--ink-3)}
 
 /* --- form options --- */
 .opt span{transition:all .16s var(--lift)}
@@ -577,7 +576,7 @@ tbody tr:hover td.us{background:#F6E8C6}
 @media (hover:none){
   .card:hover,.co:hover,.sit:hover,.proof-cell:hover,.step:hover,.guar-card:hover,
   .pq-item:hover,.chip:hover,.county:hover,details:hover,.honest:hover,.refs:hover,
-  .founder-photo:hover,.btn:hover,.nav-phone:hover,.calc-in:hover{transform:none}
+  .founder-photo:hover,.btn:hover,.nav-phone:hover{transform:none}
 }
 /* ============================================================ */
 
@@ -640,7 +639,7 @@ tbody tr:hover td.us{background:#F6E8C6}
 <div class="util">
   <div class="wrap">
     <span class="dot"></span>
-    <span>Now buying in <b>Miami-Dade</b>, <b>Broward</b> &amp; <b>Palm Beach</b> &nbsp;·&nbsp; Cash, as-is, 7-day close &nbsp;·&nbsp; <b>Hablamos Español</b></span>
+    <span>Now buying in <b>Miami-Dade</b>, <b>Broward</b> &amp; <b>Palm Beach</b> &nbsp;·&nbsp; Cash, as-is, 7-day close &nbsp;·&nbsp; <b>Nou pale Kreyòl</b></span>
   </div>
 </div>
 
@@ -830,7 +829,7 @@ tbody tr:hover td.us{background:#F6E8C6}
     <!-- full-width coverage strip -->
     <div class="coverage">
       <span class="coverage-label">Buying right now in</span>
-      <div class="counties"><span class="county">Miami</span><span class="county">Hialeah</span><span class="county">Miami Gardens</span><span class="county">Homestead</span><span class="county">North Miami</span><span class="county">Kendall</span><span class="county">Doral</span><span class="county">Cutler Bay</span><span class="county">Opa-locka</span><span class="county">Miami Beach</span><span class="county">Coral Gables</span><span class="county">Little Haiti</span><span class="county">Fort Lauderdale</span><span class="county">Hollywood</span><span class="county">Pembroke Pines</span><span class="county">Miramar</span><span class="county">Coral Springs</span><span class="county">Pompano Beach</span><span class="county">Davie</span><span class="county">Plantation</span><span class="county">Sunrise</span><span class="county">Tamarac</span><span class="county">Lauderhill</span><span class="county">Deerfield Beach</span><span class="county">West Palm Beach</span><span class="county">Boca Raton</span><span class="county">Delray Beach</span><span class="county">Boynton Beach</span><span class="county">Lake Worth</span><span class="county">Riviera Beach</span><span class="county">Jupiter</span><span class="county">Wellington</span><span class="county">Palm Beach Gardens</span></div>
+      <div class="counties"><span class="county" data-city="Miami" data-zip="33130">Miami</span><span class="county" data-city="Hialeah" data-zip="33012">Hialeah</span><span class="county" data-city="Miami Gardens" data-zip="33056">Miami Gardens</span><span class="county" data-city="Homestead" data-zip="33030">Homestead</span><span class="county" data-city="North Miami" data-zip="33161">North Miami</span><span class="county" data-city="Kendall" data-zip="33176">Kendall</span><span class="county" data-city="Doral" data-zip="33178">Doral</span><span class="county" data-city="Cutler Bay" data-zip="33189">Cutler Bay</span><span class="county" data-city="Opa-locka" data-zip="33054">Opa-locka</span><span class="county" data-city="Miami Beach" data-zip="33139">Miami Beach</span><span class="county" data-city="Coral Gables" data-zip="33134">Coral Gables</span><span class="county" data-city="Little Haiti" data-zip="33137">Little Haiti</span><span class="county" data-city="Fort Lauderdale" data-zip="33301">Fort Lauderdale</span><span class="county" data-city="Hollywood" data-zip="33020">Hollywood</span><span class="county" data-city="Pembroke Pines" data-zip="33024">Pembroke Pines</span><span class="county" data-city="Miramar" data-zip="33023">Miramar</span><span class="county" data-city="Coral Springs" data-zip="33065">Coral Springs</span><span class="county" data-city="Pompano Beach" data-zip="33060">Pompano Beach</span><span class="county" data-city="Davie" data-zip="33314">Davie</span><span class="county" data-city="Plantation" data-zip="33317">Plantation</span><span class="county" data-city="Sunrise" data-zip="33322">Sunrise</span><span class="county" data-city="Tamarac" data-zip="33321">Tamarac</span><span class="county" data-city="Lauderhill" data-zip="33313">Lauderhill</span><span class="county" data-city="Deerfield Beach" data-zip="33441">Deerfield Beach</span><span class="county" data-city="West Palm Beach" data-zip="33401">West Palm Beach</span><span class="county" data-city="Boca Raton" data-zip="33432">Boca Raton</span><span class="county" data-city="Delray Beach" data-zip="33444">Delray Beach</span><span class="county" data-city="Boynton Beach" data-zip="33435">Boynton Beach</span><span class="county" data-city="Lake Worth" data-zip="33460">Lake Worth</span><span class="county" data-city="Riviera Beach" data-zip="33404">Riviera Beach</span><span class="county" data-city="Jupiter" data-zip="33458">Jupiter</span><span class="county" data-city="Wellington" data-zip="33414">Wellington</span><span class="county" data-city="Palm Beach Gardens" data-zip="33410">Palm Beach Gardens</span></div>
     </div>
   </div>
 </section>
@@ -863,7 +862,7 @@ tbody tr:hover td.us{background:#F6E8C6}
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">Why sellers pick us</span>
-      <h2>Three promises we put in writing</h2>
+      <h2>Three promises we're putting in writing</h2>
       <p class="lede">Anyone can say "fast and fair." These are the three things we will actually commit to on paper, because they are the three things sellers get burned on.</p>
     </div>
 
@@ -928,79 +927,8 @@ tbody tr:hover td.us{background:#F6E8C6}
     <div class="honest">
       <p><strong>A cash offer is below retail. It has to be.</strong> You are trading some price for speed, certainty, zero cost, and zero work. That is the whole deal, and anyone who tells you otherwise is selling you something.</p>
       <p>So here is our rule. If your house is in decent shape, you can wait four to six months, and you can afford to front the repairs out of pocket, <strong>list it with an agent.</strong> You will probably net more. We will tell you that on the phone, for free, before you ever sign anything.</p>
-      <p>But if the house needs work you cannot fund, if there is a probate or a foreclosure clock running, if it is full of a lifetime of belongings, or if you just want this thing off your plate by the end of the month, <strong>that is exactly where we are the better answer.</strong></p>
+      <p>But if the house needs work you cannot fund, if there is a probate or a foreclosure clock running, if it is full of a lifetime of belongings, or if you simply want this handled and behind you by the end of the month, <strong>that is exactly where we are the better answer.</strong></p>
       <p>Either way, we will walk you through how we got to your number and show you the comps we used. No black box, no pressure, no games.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CALCULATOR ================= -->
-<section class="sec" id="calculator">
-  <div class="wrap">
-    <div class="center">
-      <h2>What would you actually keep?</h2>
-      <p class="lede">Everybody compares the sale price. Almost nobody compares what lands in their bank account. Move the numbers and see for yourself.</p>
-    </div>
-
-    <div class="calc">
-      <div class="calc-in">
-        <div class="fld">
-          <label for="arv">What would it be worth fixed up?</label>
-          <div class="money"><input type="number" id="arv" value="400000" min="0" step="5000" inputmode="numeric"></div>
-        </div>
-        <div class="fld">
-          <label for="rep">What does it need in repairs?</label>
-          <div class="money"><input type="number" id="rep" value="50000" min="0" step="2500" inputmode="numeric"></div>
-        </div>
-        <div class="fld">
-          <label for="mort">How much is still owed on it?</label>
-          <div class="money"><input type="number" id="mort" value="0" min="0" step="5000" inputmode="numeric"></div>
-        </div>
-        <p class="calc-note">Estimates only. Your real offer depends on the property, the title, and the comps. That is what the phone call is for.</p>
-
-        <div class="calc-cta">
-          <h3>Want the real number instead of an estimate?</h3>
-          <p>Give us the address and we will run actual comps on your street and put a written offer in your hands within 24 hours. Free, no obligation.</p>
-          <a class="btn btn-ink btn-block" href="#offer-form">Get My Cash Offer</a>
-          <a class="calc-call" href="tel:+17869207419" data-track="call-calc">Or call (786) 920-7419</a>
-        </div>
-      </div>
-
-      <div class="calc-out">
-        <div class="co">
-          <div class="co-top">
-            <h3>Listing with an agent</h3>
-            <span class="co-time">4 to 6 months</span>
-          </div>
-          <div class="co-rows">
-            <div class="co-row"><span>Sale price</span><b id="l-price">$400,000</b></div>
-            <div class="co-row neg"><span>Repairs you pay for up front</span><b id="l-rep">-$50,000</b></div>
-            <div class="co-row neg"><span>Agent commission (6%)</span><b id="l-com">-$24,000</b></div>
-            <div class="co-row neg"><span>Closing costs &amp; concessions (2.5%)</span><b id="l-cc">-$10,000</b></div>
-            <div class="co-row neg"><span>Holding costs while it sits (3%)</span><b id="l-hold">-$12,000</b></div>
-            <div class="co-row neg"><span>Mortgage payoff</span><b id="l-mort">-$0</b></div>
-          </div>
-          <div class="co-net"><span>You keep</span><b id="l-net">$304,000</b></div>
-        </div>
-
-        <div class="co win">
-          <div class="co-top">
-            <h3>Our cash offer</h3>
-            <span class="co-time">7 to 14 days</span>
-          </div>
-          <div class="co-rows">
-            <div class="co-row"><span>Cash offer</span><b id="c-price">$270,000</b></div>
-            <div class="co-row"><span>Repairs you pay for</span><b class="tick">$0</b></div>
-            <div class="co-row"><span>Commissions</span><b class="tick">$0</b></div>
-            <div class="co-row"><span>Closing costs</span><b class="tick">$0 &mdash; we pay them</b></div>
-            <div class="co-row"><span>Holding costs</span><b class="tick">$0</b></div>
-            <div class="co-row neg"><span>Mortgage payoff</span><b id="c-mort">-$0</b></div>
-          </div>
-          <div class="co-net"><span>You keep</span><b id="c-net">$270,000</b></div>
-        </div>
-
-        <div class="calc-foot" id="calcVerdict"></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1128,8 +1056,9 @@ tbody tr:hover td.us{background:#F6E8C6}
       <div>
         <span class="eyebrow">Who you are calling</span>
         <h2>You are not calling a call center. You are calling Jeff.</h2>
-        <p class="lede">Probate Assets Elite is a South Florida company. When you call (786) 920-7419, you get the person who will actually look at your house, run your numbers, and sign the check. Not a script reader in another state who is going to hand your information off to four other people.</p>
-        <p class="lede">We specialize in probate and inherited property across Miami-Dade, Broward and Palm Beach. That means we know the courthouse, we know the attorneys, and we know the difference between summary and formal administration. When you are already dealing with a death in the family, the last thing you need is to explain probate to the person buying the house.</p>
+        <p class="lede">Probate Assets Elite is a South Florida company. When you call (786) 920-7419, you get the person who will actually walk your property, run your numbers, and put the offer in writing. Not a script reader in another state who is going to hand your information off to four other people.</p>
+        <p class="lede">We buy houses across Miami-Dade, Broward and Palm Beach in just about any situation. Tired of being a landlord, storm damage, a divorce, a job in another state, payments you cannot catch up on, repairs that cost more than the house is worth, or a property you simply do not want to own anymore. Whatever brought you here, you get a straight number and a real closing date.</p>
+        <p class="lede">And to be clear about how the money works: <strong>we do not hand you a check across a kitchen table.</strong> Every deal closes at a licensed South Florida title company, and the title company is who verifies the title, handles the payoff, and wires your funds. That protects you a lot more than a handshake does.</p>
         <p class="sig">Jeff<span>Founder, Probate Assets Elite LLC &middot; The Cash Home Offer</span></p>
       </div>
     </div>
@@ -1161,15 +1090,15 @@ tbody tr:hover td.us{background:#F6E8C6}
       </details>
       <details>
         <summary>Will you lowball me?</summary>
-        <div class="ans"><p>We are not going to pretend a cash offer is retail. It is not, and we say so right on this page. What we will not do is waste your time with a number that does not make sense, and we will not quote you high to get the contract and then grind you down after inspection. If we cannot pay enough to actually help you, we will say so on the first call and point you somewhere better.</p></div>
+        <div class="ans"><p>We are not going to pretend a cash offer is retail. It is not, and we say so right on this page. What we will not do is waste your time with a number that does not make sense, and we will not quote you high to get the contract and then grind you down after inspection. If we cannot pay enough to actually help you, we will say so on the first call and point you somewhere better. We are just a totally different company than the rest.</p></div>
       </details>
       <details>
         <summary>Do I need to clean it out or fix anything?</summary>
-        <div class="ans"><p>Nothing. Not one thing. Do not paint, do not repair, do not haul anything to the dump, do not even sweep. Take the belongings that matter to you and leave the rest exactly where it is. We handle the cleanout, and it is already priced into the offer.</p></div>
+        <div class="ans"><p>Nothing. Not one thing. Do not paint, do not repair, do not haul anything to the dump, do not even sweep. Take the belongings that matter to you and leave the rest exactly where it is. We handle the cleanout.</p></div>
       </details>
       <details>
         <summary>Can I sell a house that is still in probate?</summary>
-        <div class="ans"><p>In most cases, yes. Once the estate is opened with the Florida circuit court and a personal representative has been appointed, you can accept an offer and sign a contract. The sale funds once the personal representative has the court's authority to convey. We do this constantly, and we will connect you with a probate attorney at no upfront cost, paid at closing out of the proceeds.</p></div>
+        <div class="ans"><p><strong>Absolutely.</strong> Once the estate is opened with the Florida circuit court and a personal representative has been appointed, you can accept an offer and sign a contract. The sale simply funds once the personal representative has the court's authority to convey. We do this constantly and we know the process cold.</p><p>We have our own attorney, and you should have your own. We are on opposite sides of the table, so you want somebody looking out for you and only you. If you do not have one, ask us and we will point you toward a few reputable South Florida probate attorneys and let you pick.</p></div>
       </details>
       <details>
         <summary>What if the heirs do not agree on selling?</summary>
@@ -1181,15 +1110,19 @@ tbody tr:hover td.us{background:#F6E8C6}
       </details>
       <details>
         <summary>What areas do you buy in?</summary>
-        <div class="ans"><p>Miami-Dade, Broward and Palm Beach counties. That includes Miami, Hialeah, Miami Gardens, Homestead, North Miami, Fort Lauderdale, Hollywood, Pembroke Pines, Coral Springs, Pompano Beach, Davie, Miramar, Plantation, Sunrise, West Palm Beach, Boca Raton, Delray Beach, Boynton Beach, Lake Worth, Jupiter, and everything in between. Single family, townhome, condo, duplex, multifamily, and vacant land.</p></div>
+        <div class="ans"><p>Miami-Dade, Broward and Palm Beach counties. That includes Miami, Hialeah, Miami Gardens, Homestead, North Miami, Fort Lauderdale, Hollywood, Pembroke Pines, Coral Springs, Pompano Beach, Davie, Miramar, Plantation, Sunrise, West Palm Beach, Boca Raton, Delray Beach, Boynton Beach, Lake Worth, Jupiter, and everything in between. Single family, townhome, condo, duplex, multifamily, and vacant land.</p><p>We have also recently set up in the Dallas and Fort Worth, Texas area. If your property is out that way, call us and we will take a look.</p></div>
       </details>
       <details>
         <summary>Am I obligated to anything if I request an offer?</summary>
-        <div class="ans"><p>No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away. Nobody is going to hound you.</p></div>
+        <div class="ans"><p>No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away. Nobody is going to hound you, and everything you tell us is confidential.</p></div>
       </details>
       <details>
-        <summary>Do you speak Spanish?</summary>
-        <div class="ans"><p>Yes. Llámenos al (786) 920-7419. Hablamos español y podemos atenderle en el idioma que prefiera.</p></div>
+        <summary>Do you speak Spanish and Creole?</summary>
+        <div class="ans">
+          <p>Yes, both.</p>
+          <p><strong>Español:</strong> Llámenos al (786) 920-7419. Hablamos español y criollo haitiano, y podemos atenderle en el idioma que usted prefiera. La consulta es gratis y sin ningún compromiso.</p>
+          <p><strong>Kreyòl:</strong> Rele nou nan (786) 920-7419. Nou pale panyòl ak kreyòl ayisyen, epi nou ka ede w nan lang ou pi alèz la. Konsiltasyon an gratis e ou pa gen okenn obligasyon.</p>
+        </div>
       </details>
     </div>
   </div>
@@ -1200,10 +1133,22 @@ tbody tr:hover td.us{background:#F6E8C6}
   <div class="wrap">
     <span class="eyebrow">One call is all it takes</span>
     <h2>Let's find out what your house is worth to us.</h2>
-    <p class="lede">Free, no obligation, and you will have a written number in 24 hours. Worst case, you learn what your options are.</p>
     <div class="final-btns">
       <a class="btn btn-gold btn-lg" href="#offer-form" style="width:auto">Get My Cash Offer</a>
       <a class="btn btn-ghost-light btn-lg" href="tel:+17869207419" data-track="call-final" style="width:auto">Call (786) 920-7419</a>
+    </div>
+  </div>
+
+  <div class="ticker" aria-label="Free, no obligation, written number in 24 hours">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item"><i>&#9670;</i> Free, no obligation</span>
+      <span class="ticker-item"><i>&#9670;</i> A written number in 24 hours</span>
+      <span class="ticker-item"><i>&#9670;</i> Worst case, you learn what your options are</span>
+      <span class="ticker-item"><i>&#9670;</i> Zero fees, zero commissions</span>
+      <span class="ticker-item"><i>&#9670;</i> We pay the closing costs</span>
+      <span class="ticker-item"><i>&#9670;</i> Close in as little as 7 days</span>
+      <span class="ticker-item"><i>&#9670;</i> Any condition, any situation</span>
+      <span class="ticker-item"><i>&#9670;</i> Everything you tell us stays confidential</span>
     </div>
   </div>
 </section>
@@ -1227,7 +1172,6 @@ tbody tr:hover td.us{background:#F6E8C6}
         <h4>The Site</h4>
         <a href="#how">How It Works</a>
         <a href="#formula">What a Cash Offer Really Is</a>
-        <a href="#calculator">Net Proceeds Calculator</a>
         <a href="#compare">Compare Your Options</a>
         <a href="#probate">Probate &amp; Inherited Homes</a>
         <a href="#faq">FAQ</a>
@@ -1243,7 +1187,7 @@ tbody tr:hover td.us{background:#F6E8C6}
 
     <div class="foot-bot">
       <p><strong style="color:#9FB7D2">Privacy.</strong> We collect only what you give us on the form and we use it for one thing: contacting you about your property. We do not sell, rent, or share your information with third-party lead buyers. Ask us to delete your information at any time and we will.</p>
-      <p><strong style="color:#9FB7D2">Disclosure.</strong> The Cash Home Offer is a real estate investment company operated by Probate Assets Elite LLC. We are not real estate agents and we do not list properties. We buy houses directly. Our offers are below full retail market value in exchange for speed, certainty, and paying all costs. Nothing on this page is legal, tax, or financial advice. Consult a licensed attorney or accountant about your specific situation. The calculator is an estimating tool only and does not constitute an offer. Timelines depend on title condition and probate status.</p>
+      <p><strong style="color:#9FB7D2">Disclosure.</strong> The Cash Home Offer is a real estate investment company operated by Probate Assets Elite LLC. We are not real estate agents and we do not list properties. We buy houses directly. Our offers are below full retail market value in exchange for speed, certainty, and paying all costs. Nothing on this page is legal, tax, or financial advice. Consult a licensed attorney or accountant about your specific situation. Timelines depend on title condition and probate status.</p>
       <p>&copy; <span id="yr">2026</span> Probate Assets Elite LLC. All rights reserved. &nbsp;·&nbsp; Serving Miami-Dade, Broward &amp; Palm Beach County, Florida.</p>
     </div>
   </div>
@@ -1274,10 +1218,11 @@ tbody tr:hover td.us{background:#F6E8C6}
       "areaServed":[
         {"@type":"AdministrativeArea","name":"Miami-Dade County, Florida"},
         {"@type":"AdministrativeArea","name":"Broward County, Florida"},
-        {"@type":"AdministrativeArea","name":"Palm Beach County, Florida"}
+        {"@type":"AdministrativeArea","name":"Palm Beach County, Florida"},
+        {"@type":"AdministrativeArea","name":"Dallas-Fort Worth, Texas"}
       ],
       "address":{"@type":"PostalAddress","addressRegion":"FL","addressCountry":"US","addressLocality":"Miami"},
-      "knowsLanguage":["en","es"],
+      "knowsLanguage":["en","es","ht"],
       "openingHoursSpecification":[{
         "@type":"OpeningHoursSpecification",
         "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -1303,11 +1248,11 @@ tbody tr:hover td.us{background:#F6E8C6}
         {"@type":"Question","name":"How fast can you close on my South Florida house?","acceptedAnswer":{"@type":"Answer","text":"Seven days is realistic when title is clean and you are ready to move. Fourteen days is typical. If there is a probate, lien, open permit or title issue it takes longer, and we tell you that up front. You can also close slower on purpose, up to 60 days or more."}},
         {"@type":"Question","name":"Are there any fees or commissions when I sell to you?","acceptedAnswer":{"@type":"Answer","text":"No. Zero commissions, zero fees, and we pay the standard closing costs. The number on your offer is what gets wired to you, minus only what you already owe on the property such as a mortgage payoff, back taxes or liens."}},
         {"@type":"Question","name":"How do you calculate your cash offer?","acceptedAnswer":{"@type":"Answer","text":"We look at what the house would realistically sell for once it is fixed up, what it will cost to get it there, and what it costs us to carry and resell it, then work backward to a fair number. We walk you through every piece of it on the phone and show you the comps we used."}},
-        {"@type":"Question","name":"Do I need to clean out or repair the house first?","acceptedAnswer":{"@type":"Answer","text":"No. Do not paint, repair, haul anything away, or even clean. Take the belongings that matter to you and leave the rest exactly where it is. We handle the cleanout and it is already priced into the offer."}},
-        {"@type":"Question","name":"Can I sell a house that is still in probate in Florida?","acceptedAnswer":{"@type":"Answer","text":"In most cases yes. Once the estate is opened with the Florida circuit court and a personal representative is appointed, you can accept an offer and sign a contract. The sale funds once the personal representative has the court's authority to convey. We can connect you with a probate attorney at no upfront cost, paid at closing from the sale proceeds."}},
+        {"@type":"Question","name":"Do I need to clean out or repair the house first?","acceptedAnswer":{"@type":"Answer","text":"No. Do not paint, repair, haul anything away, or even clean. Take the belongings that matter to you and leave the rest exactly where it is. We handle the cleanout."}},
+        {"@type":"Question","name":"Can I sell a house that is still in probate in Florida?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Once the estate is opened with the Florida circuit court and a personal representative is appointed, you can accept an offer and sign a contract. The sale funds once the personal representative has the court's authority to convey. We have our own attorney and you should have your own, since we are on opposite sides of the table. If you do not have one we can point you toward several reputable South Florida probate attorneys and let you choose."}},
         {"@type":"Question","name":"What if the heirs cannot agree on selling the inherited house?","acceptedAnswer":{"@type":"Answer","text":"A house cannot be split but cash can. A clean cash sale gives every heir the same number and the same closing date in writing at the same time, which removes the argument. In a formal administration the personal representative generally has authority to sell with court approval."}},
-        {"@type":"Question","name":"What areas of South Florida do you buy houses in?","acceptedAnswer":{"@type":"Answer","text":"Miami-Dade, Broward and Palm Beach counties, including Miami, Hialeah, Miami Gardens, Homestead, Fort Lauderdale, Hollywood, Pembroke Pines, Coral Springs, Pompano Beach, Davie, Miramar, West Palm Beach, Boca Raton, Delray Beach, Boynton Beach and Jupiter. Single family, townhome, condo, duplex, multifamily and vacant land."}},
-        {"@type":"Question","name":"Am I obligated to accept your offer?","acceptedAnswer":{"@type":"Answer","text":"No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away."}}
+        {"@type":"Question","name":"What areas of South Florida do you buy houses in?","acceptedAnswer":{"@type":"Answer","text":"Miami-Dade, Broward and Palm Beach counties, including Miami, Hialeah, Miami Gardens, Homestead, Fort Lauderdale, Hollywood, Pembroke Pines, Coral Springs, Pompano Beach, Davie, Miramar, West Palm Beach, Boca Raton, Delray Beach, Boynton Beach and Jupiter. Single family, townhome, condo, duplex, multifamily and vacant land. We have also recently set up in the Dallas and Fort Worth, Texas area."}},
+        {"@type":"Question","name":"Am I obligated to accept your offer?","acceptedAnswer":{"@type":"Answer","text":"No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away. Everything you tell us is confidential."}}
       ]
     },
     {
@@ -1495,50 +1440,47 @@ tbody tr:hover td.us{background:#F6E8C6}
     btn.parentNode.insertBefore(m,btn.nextSibling);
   }
 
+
   /* =======================================================
-     NET PROCEEDS CALCULATOR
+     CITY CHIPS -> ZIP ON HOVER
   ======================================================= */
-  var arv=document.getElementById("arv"), rep=document.getElementById("rep"), mort=document.getElementById("mort");
-
-  function money(n){
-    var neg=n<0; n=Math.round(Math.abs(n));
-    return (neg?"-$":"$")+n.toLocaleString("en-US");
-  }
-  function txt(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
-
-  function calc(){
-    var A=Math.max(0,+arv.value||0), R=Math.max(0,+rep.value||0), M=Math.max(0,+mort.value||0);
-
-    var com=A*0.06, cc=A*0.025, hold=A*0.03;
-    var listNet=A-R-com-cc-hold-M;
-
-    var offer=Math.max(0,A-R-(A*0.20));
-    var cashNet=offer-M;
-
-    txt("l-price",money(A));
-    txt("l-rep",money(-R));
-    txt("l-com",money(-com));
-    txt("l-cc",money(-cc));
-    txt("l-hold",money(-hold));
-    txt("l-mort",money(-M));
-    txt("l-net",money(listNet));
-
-    txt("c-price",money(offer));
-    txt("c-mort",money(-M));
-    txt("c-net",money(cashNet));
-
-    var diff=listNet-cashNet;
-    var v=document.getElementById("calcVerdict");
-    if(!v) return;
-
-    if(cashNet>=listNet){
-      v.innerHTML="<b>In your case, the cash offer nets you more</b> &mdash; about "+money(cashNet-listNet)+" more &mdash; and it happens in about a week instead of six months. That happens whenever the repair number is large relative to the value.";
-    } else {
-      v.innerHTML="<b>Listing looks like it nets you about "+money(diff)+" more.</b> But that number assumes you can front <b>"+money(R)+"</b> in repairs out of pocket, carry the house for four to six months, sit through the showings, and that the buyer's financing does not fall through. If any one of those is not true for you, it is not really a live option &mdash; and that is exactly when we are the better answer.";
+  (function(){
+    var chips=[].slice.call(document.querySelectorAll('.county[data-zip]'));
+    if(!chips.length) return;
+    function lock(){
+      chips.forEach(function(c){
+        c.style.minWidth='';
+        var city=c.dataset.city, zip=c.dataset.zip;
+        c.textContent=city; var wCity=c.getBoundingClientRect().width;
+        c.textContent=zip;  var wZip=c.getBoundingClientRect().width;
+        c.textContent=city;
+        c.style.minWidth=Math.ceil(Math.max(wCity,wZip))+'px';
+      });
     }
-  }
-  [arv,rep,mort].forEach(function(el){ if(el){ el.addEventListener("input",calc); el.addEventListener("change",calc); } });
-  calc();
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(lock); } else { lock(); }
+    window.addEventListener('resize',function(){ clearTimeout(window.__zt); window.__zt=setTimeout(lock,200); });
+
+    chips.forEach(function(c){
+      function toZip(){ c.textContent=c.dataset.zip; c.classList.add('is-zip'); }
+      function toCity(){ c.textContent=c.dataset.city; c.classList.remove('is-zip'); }
+      c.addEventListener('mouseenter',toZip);
+      c.addEventListener('mouseleave',toCity);
+      c.addEventListener('focus',toZip);
+      c.addEventListener('blur',toCity);
+      c.setAttribute('tabindex','0');
+      c.setAttribute('title',c.dataset.city+' \u00B7 '+c.dataset.zip);
+    });
+  })();
+
+
+  /* =======================================================
+     TICKER: seamless left-to-right tape
+  ======================================================= */
+  (function(){
+    var t=document.getElementById('tickerTrack');
+    if(!t) return;
+    t.innerHTML = t.innerHTML + t.innerHTML;
+  })();
 
   /* init bar */
   setBar(1);
