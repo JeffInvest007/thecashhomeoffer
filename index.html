@@ -1841,12 +1841,26 @@ body.menu-open .sticky{display:none}
       var H=box.offsetHeight||420;
       var vw=document.documentElement.clientWidth||window.innerWidth;
       var vh=window.innerHeight||document.documentElement.clientHeight;
-      var x=r.left+r.width/2-W/2;
+      var cx=r.left+r.width/2, x, y, org;
+      if(r.top-H-12>=8){                 /* above the chip: the default */
+        y=r.top-H-12; org='50% 100%';
+        x=cx-W/2;
+      } else if(r.bottom+12+H<=vh-8){    /* below the chip */
+        y=r.bottom+12; org='50% 0%';
+        x=cx-W/2;
+      } else if(r.right+14+W<=vw-10){    /* no room either way: sit beside it */
+        x=r.right+14; org='0% 50%';
+        y=r.top+r.height/2-H/2;
+      } else if(r.left-14-W>=10){
+        x=r.left-14-W; org='100% 50%';
+        y=r.top+r.height/2-H/2;
+      } else {                           /* last resort: clamp on screen */
+        x=cx-W/2; y=r.top-H-12; org='50% 100%';
+      }
       if(x<10) x=10;
       if(x>vw-W-10) x=Math.max(10,vw-W-10);
-      var y=r.top-H-12, org='50% 100%';
-      if(y<8){ y=r.bottom+12; org='50% 0%'; }
-      if(y+H>vh-8){ y=Math.max(8,vh-H-8); }
+      if(y<8) y=8;
+      if(y+H>vh-8) y=Math.max(8,vh-H-8);
       box.style.transformOrigin=org;
       box.style.left=Math.round(x)+'px';
       box.style.top=Math.round(y)+'px';
