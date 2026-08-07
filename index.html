@@ -16,7 +16,11 @@
 <meta property="og:title" content="Cash Offer in 24 Hours. Closed in 7 Days. South Florida.">
 <meta property="og:description" content="We buy houses in Miami-Dade, Broward and Palm Beach exactly as they sit. No repairs, no cleaning, no commissions, no fees. The number we quote is the number you get.">
 <meta property="og:url" content="https://thecashhomeoffer.com/">
-<meta property="og:image" content="https://thecashhomeoffer.com/og.png">
+<meta property="og:image" content="https://thecashhomeoffer.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Cash Home Offer - cash offer in 24 hours, closed in 7 days, South Florida">
+<meta name="twitter:image" content="https://thecashhomeoffer.com/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314283F'/%3E%3Cpath d='M32 14 L52 30 H46 V50 H18 V30 H12 Z' fill='%23E9B44C'/%3E%3C/svg%3E">
@@ -234,7 +238,31 @@ input.err,select.err{border-color:var(--red);box-shadow:0 0 0 3.5px rgba(180,64,
 .done-ic{width:66px;height:66px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;margin:0 auto 18px}
 .done-ic svg{width:32px;height:32px;color:var(--green)}
 .done h3{font-size:1.5rem}
-.done .btn{margin-top:8px}
+.done-lede{color:var(--muted);max-width:42ch;margin:0 auto 24px}
+.next-steps{list-style:none;counter-reset:ns;padding:0;margin:0 0 22px;text-align:left}
+.next-steps li{
+  counter-increment:ns;position:relative;padding:0 0 18px 46px;
+}
+.next-steps li::before{
+  content:counter(ns);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;
+  background:var(--ink);color:var(--gold);font-weight:800;font-size:.88rem;display:grid;place-items:center;
+}
+.next-steps li::after{
+  content:"";position:absolute;left:14.5px;top:34px;bottom:4px;width:1.5px;background:var(--line);
+}
+.next-steps li:last-child{padding-bottom:0}
+.next-steps li:last-child::after{display:none}
+.next-steps b{display:block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);margin-bottom:4px}
+.next-steps span{display:block;font-size:.94rem;color:var(--muted);line-height:1.55}
+.done-prep{
+  background:var(--sky-soft);border:1px solid #CFE3F5;border-radius:var(--r);
+  padding:16px 18px;text-align:left;font-size:.92rem;color:var(--muted);line-height:1.55;margin-bottom:24px;
+}
+.done-prep b{color:var(--text)}
+.done-cta-label{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:10px}
+.done-sms{display:block;margin-top:12px;font-size:.92rem;font-weight:700;color:var(--muted);text-decoration:none}
+.done-sms:hover{color:var(--ink-3)}
+.done .btn{margin-top:0}
 
 /* ---------- proof strip ---------- */
 .proof{background:var(--mist);border-bottom:1px solid var(--line)}
@@ -567,6 +595,8 @@ details:hover summary::after{border-color:var(--ink-3)}
 .foot-grid a{transition:color .16s ease,transform .16s var(--lift)}
 .foot-grid a:hover{color:var(--gold);transform:translateX(3px)}
 .cf-alt a:hover{color:var(--ink-3)}
+.cf-or{color:var(--faint);font-weight:600;margin:0 3px}
+.cf-hours{display:block;margin-top:8px;font-size:.82rem;color:var(--faint);font-weight:500;line-height:1.45}
 
 /* --- form options --- */
 .opt span{transition:all .16s var(--lift)}
@@ -631,6 +661,25 @@ details:hover summary::after{border-color:var(--ink-3)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 </style>
+<!-- ============ GOOGLE ANALYTICS 4 ============
+     PASTE YOUR MEASUREMENT ID BELOW (looks like G-XXXXXXXXXX).
+     Leave it as-is and nothing loads, nothing breaks.
+============================================== -->
+<script>
+  window.GA4_ID = "";           /* <-- put your G- ID here */
+  (function(){
+    var id=window.GA4_ID;
+    if(!id || id.indexOf("G-")!==0) return;
+    var s=document.createElement("script");
+    s.async=true; s.src="https://www.googletagmanager.com/gtag/js?id="+id;
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=function(){dataLayer.push(arguments);};
+    gtag("js",new Date());
+    gtag("config",id);
+  })();
+</script>
+
 </head>
 <body>
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
@@ -719,6 +768,7 @@ details:hover summary::after{border-color:var(--ink-3)}
             <input type="hidden" name="subject" id="w3subject" value="New cash offer request from thecashhomeoffer.com">
             <input type="hidden" name="from_name" value="The Cash Home Offer Website">
             <input type="hidden" name="page_source" id="pageSource" value="">
+            <input type="hidden" name="Campaign" id="campaignField" value="">
             <input type="hidden" name="submitted_at" id="submittedAt" value="">
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -803,7 +853,7 @@ details:hover summary::after{border-color:var(--ink-3)}
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Free, always</span>
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Your info stays private</span>
               </div>
-              <p class="consent">By submitting, you agree we may call or text you about your property at the number provided. We never sell or share your information. See our <a href="#privacy">Privacy Notice</a>.</p>
+              <p class="consent">By clicking Get My Cash Offer you are asking The Cash Home Offer (Probate Assets Elite LLC) to contact you about this property. You agree we may call, text, or email you at the number and address you gave us, including by automated means. Message and data rates may apply. Consent is <strong>not</strong> a condition of any sale. Reply STOP to any text to opt out, or just tell us and we will stop. We never sell or share your information with anyone. See our <a href="#privacy">Privacy Notice</a>.</p>
               <div class="cf-nav" style="margin-top:6px">
                 <button type="button" class="back" data-back="3">&larr; Back</button>
               </div>
@@ -811,7 +861,10 @@ details:hover summary::after{border-color:var(--ink-3)}
           </form>
 
           <div class="cf-alt">
-            Rather just talk? Call or text <a href="tel:+17869207419" data-track="call-form">(786) 920-7419</a>
+            Rather just talk? <a href="tel:+17869207419" data-track="call-form">Call (786) 920-7419</a>
+            <span class="cf-or">or</span>
+            <a href="sms:+17869207419?&body=Hi%20Jeff%2C%20I%20want%20a%20cash%20offer%20on%20my%20property%20at%3A%20">text us instead</a>
+            <span class="cf-hours">Call or text 7 days a week. If we miss you, we call back the same day.</span>
           </div>
         </div>
 
@@ -820,8 +873,30 @@ details:hover summary::after{border-color:var(--ink-3)}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           </div>
           <h3>Got it. We are on it.</h3>
-          <p style="color:var(--muted)">Jeff or someone on the team will call you within 24 hours with your written offer. If you want it sooner, call us right now and we will pull your numbers while you are on the phone.</p>
-          <a class="btn btn-ink btn-lg" href="tel:+17869207419" data-track="call-thankyou">Call (786) 920-7419</a>
+          <p class="done-lede">Your request came straight to Jeff's phone. Here is exactly what happens next, so you are not left wondering.</p>
+
+          <ol class="next-steps">
+            <li>
+              <b>Today</b>
+              <span>We pull the county records and recent sales on your street. No cost, no obligation, and nothing shows up publicly.</span>
+            </li>
+            <li>
+              <b>Within 24 hours</b>
+              <span>We call you. Expect about 10 minutes. We will ask what shape the property is in and what you need to have happen. Then you get a number in writing.</span>
+            </li>
+            <li>
+              <b>Then it is your call</b>
+              <span>Take it, sit on it, or use it to check what an agent tells you. If listing would put more money in your pocket, we will say so.</span>
+            </li>
+          </ol>
+
+          <div class="done-prep">
+            <b>Nothing to prepare.</b> Do not clean, do not repair, do not go looking for paperwork. If you happen to know roughly what is owed on it, that speeds things up. If not, that is fine too.
+          </div>
+
+          <p class="done-cta-label">Do not want to wait for our call?</p>
+          <a class="btn btn-ink btn-lg" href="tel:+17869207419" data-track="call-thankyou">Call (786) 920-7419 now</a>
+          <a class="done-sms" href="sms:+17869207419?&body=Hi%20Jeff%2C%20I%20just%20submitted%20my%20property%20on%20your%20website.">Or send us a text</a>
         </div>
       </div>
     </div>
@@ -1195,8 +1270,9 @@ details:hover summary::after{border-color:var(--ink-3)}
 
 <!-- ================= STICKY MOBILE BAR ================= -->
 <div class="sticky">
-  <a class="btn btn-ghost-light" href="tel:+17869207419" data-track="call-sticky">Call Now</a>
-  <a class="btn btn-gold" href="#offer-form">Get My Cash Offer</a>
+  <a class="btn btn-ghost-light" href="tel:+17869207419" data-track="call-sticky" aria-label="Call now">Call</a>
+  <a class="btn btn-ghost-light" href="sms:+17869207419?&body=Hi%20Jeff%2C%20I%20want%20a%20cash%20offer%20on%20my%20property%20at%3A%20" aria-label="Text us">Text</a>
+  <a class="btn btn-gold" href="#offer-form" style="flex:1.6">Get My Cash Offer</a>
 </div>
 
 <!-- ================= SCHEMA ================= -->
@@ -1214,7 +1290,7 @@ details:hover summary::after{border-color:var(--ink-3)}
       "telephone":"+1-786-920-7419",
       "email":"probateassetselite@gmail.com",
       "priceRange":"$$",
-      "image":"https://thecashhomeoffer.com/og.png",
+      "image":"https://thecashhomeoffer.com/og.jpg",
       "areaServed":[
         {"@type":"AdministrativeArea","name":"Miami-Dade County, Florida"},
         {"@type":"AdministrativeArea","name":"Broward County, Florida"},
@@ -1365,7 +1441,7 @@ details:hover summary::after{border-color:var(--ink-3)}
         var bad2=!c.value;
         err("e2",bad2); mark(c,bad2); if(bad2){ c.focus(); ok=false; }
       }
-      if(ok){ save(); show(n+1); setBar(n+1); }
+      if(ok){ save(); show(n+1); setBar(n+1); track('form_step_'+(n+1),{campaign:CAMPAIGN}); }
     });
   });
   document.querySelectorAll("[data-back]").forEach(function(b){
@@ -1412,13 +1488,16 @@ details:hover summary::after{border-color:var(--ink-3)}
     document.getElementById("submittedAt").value=new Date().toLocaleString("en-US",{timeZone:"America/New_York"})+" ET";
     document.getElementById("pageSource").value=(document.referrer||"direct")+" | "+window.location.href;
     var addrVal=document.getElementById("address").value.trim();
-    document.getElementById("w3subject").value="NEW LEAD: "+addrVal+" ("+ (form.querySelector('input[name="Situation"]:checked')||{value:"situation not given"}).value +")";
+    var sitV=(form.querySelector('input[name="Situation"]:checked')||{value:"situation not given"}).value;
+    var tlV=(form.querySelector('input[name="Timeline"]:checked')||{value:""}).value;
+    document.getElementById("w3subject").value =
+      "NEW LEAD " + pn.value + "  |  " + addrVal + "  |  " + sitV + (tlV ? "  |  " + tlV : "");
 
     var fd=new FormData(form);
     fetch("https://api.web3forms.com/submit",{method:"POST",body:fd})
       .then(function(r){ return r.json(); })
       .then(function(j){
-        if(j && j.success){ finish(); }
+        if(j && j.success){ track('generate_lead',{campaign:CAMPAIGN}); finish(); }
         else { fail(btn); }
       })
       .catch(function(){ fail(btn); });
@@ -1481,6 +1560,50 @@ details:hover summary::after{border-color:var(--ink-3)}
     if(!t) return;
     t.innerHTML = t.innerHTML + t.innerHTML;
   })();
+
+
+  /* =======================================================
+     CAMPAIGN ATTRIBUTION
+     thecashhomeoffer.com/?src=probate-mailer-aug  -> tagged on the lead
+  ======================================================= */
+  var CAMPAIGN=(function(){
+    var q=new URLSearchParams(window.location.search);
+    var parts=[];
+    ["src","utm_source","utm_medium","utm_campaign","utm_content","gclid"].forEach(function(k){
+      var v=q.get(k); if(v) parts.push(k+"="+v);
+    });
+    var found=parts.join(" | ");
+    try{
+      if(found){ sessionStorage.setItem("tcho_campaign",found); }
+      else { found=sessionStorage.getItem("tcho_campaign")||""; }
+    }catch(e){}
+    if(!found){
+      var r=document.referrer||"";
+      if(!r) found="direct";
+      else if(/google\./.test(r)) found="organic google";
+      else if(/bing\./.test(r)) found="organic bing";
+      else if(/facebook\.|instagram\./.test(r)) found="social";
+      else found="referral: "+r;
+    }
+    var f=document.getElementById("campaignField");
+    if(f) f.value=found;
+    return found;
+  })();
+
+  /* =======================================================
+     ANALYTICS EVENTS  (fire only once a GA4 ID is pasted in)
+  ======================================================= */
+  function track(name,params){
+    try{ if(typeof window.gtag==="function"){ window.gtag("event",name,params||{}); } }catch(e){}
+  }
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+    a.addEventListener("click",function(){
+      track("phone_call_click",{location:a.dataset.track||"unknown",campaign:CAMPAIGN});
+    });
+  });
+  document.querySelectorAll('a[href^="sms:"]').forEach(function(a){
+    a.addEventListener("click",function(){ track("sms_click",{campaign:CAMPAIGN}); });
+  });
 
   /* init bar */
   setBar(1);
