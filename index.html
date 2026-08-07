@@ -639,6 +639,86 @@ details:hover summary::after{border-color:var(--ink-3)}
 }
 /* ============================================================ */
 
+
+/* ===================== MOBILE MENU ===================== */
+.menu-btn{
+  display:none;align-items:center;justify-content:center;
+  width:46px;height:46px;flex:0 0 auto;padding:0;
+  background:var(--ink);border:0;border-radius:12px;cursor:pointer;
+  transition:background .18s ease,transform .18s var(--lift);
+}
+.menu-btn:hover{background:var(--ink-3)}
+.menu-btn:active{transform:scale(.94)}
+.menu-bars{display:block;width:20px;height:14px;position:relative}
+.menu-bars i{
+  position:absolute;left:0;right:0;height:2.5px;border-radius:2px;background:var(--gold);
+  transition:transform .28s var(--lift),opacity .18s ease,top .28s var(--lift);
+}
+.menu-bars i:nth-child(1){top:0}
+.menu-bars i:nth-child(2){top:5.75px}
+.menu-bars i:nth-child(3){top:11.5px}
+.menu-btn[aria-expanded="true"] .menu-bars i:nth-child(1){top:5.75px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .menu-bars i:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] .menu-bars i:nth-child(3){top:5.75px;transform:rotate(-45deg)}
+
+.menu-backdrop{
+  position:fixed;inset:0;z-index:96;background:rgba(8,17,28,.60);
+  backdrop-filter:blur(3px);opacity:0;transition:opacity .25s ease;
+}
+.menu-backdrop.on{opacity:1}
+
+.mobile-menu{
+  position:fixed;z-index:97;top:0;right:0;bottom:0;width:min(400px,88vw);
+  background:linear-gradient(165deg,var(--ink) 0%,var(--ink-2) 100%);
+  border-left:1px solid rgba(255,255,255,.13);
+  box-shadow:-24px 0 60px rgba(0,0,0,.45);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+}
+.mobile-menu.on{transform:translateX(0)}
+.mm-inner{padding:16px 22px calc(28px + env(safe-area-inset-bottom))}
+.mm-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px;min-height:46px}
+.mm-close{
+  width:44px;height:44px;flex:0 0 auto;display:grid;place-items:center;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:12px;color:var(--gold);
+  transition:background .18s ease,transform .18s var(--lift),border-color .18s ease;
+}
+.mm-close:hover{background:rgba(233,180,76,.20);border-color:var(--gold)}
+.mm-close:active{transform:scale(.94)}
+.mm-close svg{width:20px;height:20px}
+.mm-label{
+  display:block;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin:0;
+}
+.mobile-menu a:not(.btn){
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 4px;text-decoration:none;color:#fff;font-weight:700;font-size:1.05rem;
+  border-bottom:1px solid rgba(255,255,255,.10);letter-spacing:-.01em;
+  transition:color .16s ease,padding-left .18s var(--lift);
+}
+.mobile-menu a:not(.btn):first-of-type{color:var(--gold)}
+.mobile-menu a:not(.btn):hover,.mobile-menu a:not(.btn):active{color:var(--gold);padding-left:8px}
+.mobile-menu a:not(.btn) svg{width:17px;height:17px;color:var(--sky);flex:0 0 auto;opacity:.75}
+.mm-cta{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.mm-cta .btn{width:100%;padding:16px 20px}
+.mm-note{
+  margin:16px 0 0;font-size:.82rem;line-height:1.55;color:#9BB2CD;font-weight:500;text-align:center;
+}
+body.menu-open{overflow:hidden}
+body.menu-open .sticky{display:none}
+
+@media (max-width:1020px){
+  .menu-btn{display:inline-flex}
+}
+@media (min-width:1021px){
+  .mobile-menu,.menu-backdrop{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .mobile-menu{transition:none}
+  .menu-backdrop{transition:none}
+}
+/* ====================================================== */
+
 /* ---------- responsive ---------- */
 @media (max-width:1210px){
   .nav-links{gap:14px}
@@ -757,6 +837,9 @@ details:hover summary::after{border-color:var(--ink-3)}
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="menu-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        </button>
         <a class="nav-phone" href="tel:+17869207419" data-track="call-header">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
           (786) 920-7419
@@ -766,6 +849,33 @@ details:hover summary::after{border-color:var(--ink-3)}
     </nav>
   </div>
 </header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="menu-backdrop" id="menuBackdrop" hidden></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu" hidden>
+  <div class="mm-inner">
+    <div class="mm-top">
+      <span class="mm-label">Jump to</span>
+      <button class="mm-close" id="menuClose" type="button" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <a href="#offer-form"><span>Get My Cash Offer</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#how"><span>How It Works</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#formula"><span>Straight Talk</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#compare"><span>Compare Your Options</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#situations"><span>Situations We Buy</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#probate"><span>Probate &amp; Inherited</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#about"><span>Meet Jeff</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#faq"><span>FAQ</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+
+    <div class="mm-cta">
+      <a class="btn btn-gold" href="tel:+17869207419" data-track="call-menu">Call (786) 920-7419</a>
+      <a class="btn btn-ghost-light" href="sms:+17869207419?&amp;body=Hi%20Jeff%2C%20I%20want%20a%20cash%20offer%20on%20my%20property%20at%3A%20">Text us instead</a>
+    </div>
+    <p class="mm-note">Call or text 7 days a week. If we miss you, we call back the same day.<br>Se habla español &middot; Nou pale Kreyòl</p>
+  </div>
+</nav>
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
@@ -1667,6 +1777,68 @@ details:hover summary::after{border-color:var(--ink-3)}
   document.querySelectorAll('a[href^="sms:"]').forEach(function(a){
     a.addEventListener("click",function(){ track("sms_click",{campaign:CAMPAIGN}); });
   });
+
+
+  /* =======================================================
+     MOBILE MENU
+  ======================================================= */
+  (function(){
+    var btn=document.getElementById('menuBtn');
+    var panel=document.getElementById('mobileMenu');
+    var back=document.getElementById('menuBackdrop');
+    if(!btn||!panel||!back) return;
+    var open=false, lastY=0;
+
+    function setOpen(v){
+      open=v;
+      btn.setAttribute('aria-expanded', v?'true':'false');
+      btn.setAttribute('aria-label', v?'Close menu':'Open menu');
+      if(v){
+        lastY=window.scrollY;
+        panel.hidden=false; back.hidden=false;
+        requestAnimationFrame(function(){ panel.classList.add('on'); back.classList.add('on'); });
+        document.body.classList.add('menu-open');
+        track('menu_open',{});
+      } else {
+        panel.classList.remove('on'); back.classList.remove('on');
+        document.body.classList.remove('menu-open');
+        setTimeout(function(){ if(!open){ panel.hidden=true; back.hidden=true; } },300);
+      }
+    }
+
+    btn.addEventListener('click',function(){ setOpen(!open); });
+    var closeBtn=document.getElementById('menuClose');
+    if(closeBtn) closeBtn.addEventListener('click',function(){ setOpen(false); btn.focus(); });
+    back.addEventListener('click',function(){ setOpen(false); });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape' && open){ setOpen(false); btn.focus(); }
+    });
+    panel.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(e){
+        var href=a.getAttribute('href')||'';
+        if(href.charAt(0)==='#'){
+          /* close first so the scroll lock is off, then jump */
+          e.preventDefault();
+          var target=document.querySelector(href);
+          setOpen(false);
+          setTimeout(function(){
+            if(!target) return;
+            var head=document.querySelector('header');
+            var offset=(head?head.getBoundingClientRect().height:66)+12;
+            var y=target.getBoundingClientRect().top+window.pageYOffset-offset;
+            try{ window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }
+            catch(err){ window.scrollTo(0,Math.max(0,y)); }
+            if(history.replaceState) history.replaceState(null,'',href);
+          },330);
+        } else {
+          setOpen(false);
+        }
+      });
+    });
+    window.addEventListener('resize',function(){
+      if(window.innerWidth>1020 && open) setOpen(false);
+    });
+  })();
 
   /* init bar */
   setBar(1);
