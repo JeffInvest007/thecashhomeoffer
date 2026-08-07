@@ -833,6 +833,34 @@ body.menu-open .sticky{display:none}
   .hero-cta-row .btn{width:100%}
   th,td{padding:13px 14px;font-size:.9rem}
 }
+
+/* ================= [MAP-FEATURE] city chip -> tri-county map popover ================= */
+#cityMap{
+  position:fixed;left:0;top:0;z-index:130;pointer-events:none;
+  width:174px;padding:11px 12px 10px;border-radius:14px;
+  background:#fff;border:1px solid var(--line);
+  box-shadow:0 22px 48px -12px rgba(8,20,35,.55),0 4px 12px rgba(8,20,35,.28);
+  opacity:0;transform:translateY(7px) scale(.93);transform-origin:50% 100%;
+  transition:opacity .15s ease,transform .19s var(--lift);
+  will-change:transform,opacity;
+}
+#cityMap.on{opacity:1;transform:translateY(0) scale(1)}
+#cityMap .cm-name{
+  font-size:.715rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink);line-height:1.25;text-align:center;
+}
+#cityMap .cm-zip{display:block;color:var(--gold-2);font-size:.66rem;letter-spacing:.12em;margin-top:2px}
+#cityMap svg{display:block;width:100%;height:auto;margin:8px 0 7px}
+#cityMap .cm-county{
+  font-size:.585rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);text-align:center;
+}
+#cityMap .cm-co{fill:#E3EBF4;stroke:#AFC6DC;stroke-width:3.5;stroke-linejoin:round}
+#cityMap .cm-co.hit{fill:#FAE7BE;stroke:var(--gold-2);stroke-width:6}
+#cityMap .cm-ring{fill:none;stroke:var(--gold-2);stroke-width:8}
+#cityMap .cm-dot{fill:var(--gold);stroke:var(--ink);stroke-width:6;paint-order:stroke}
+@media (prefers-reduced-motion:reduce){#cityMap .cm-ring{display:none}}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 
@@ -1765,6 +1793,98 @@ body.menu-open .sticky{display:none}
       c.setAttribute('tabindex','0');
       c.setAttribute('title',c.dataset.city+' \u00B7 '+c.dataset.zip);
     });
+  })();
+
+
+  /* =======================================================
+     [MAP-FEATURE] CITY CHIP -> TRI-COUNTY MAP POPOVER
+     To revert: delete this IIFE and the #cityMap CSS block.
+  ======================================================= */
+  (function(){
+    if(!window.matchMedia || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    var chips=[].slice.call(document.querySelectorAll('.county[data-zip]'));
+    if(!chips.length) return;
+
+    var D={
+      palm:'M377.1 350.9L374.9 351L370.6 350.9L370.1 350.9L368.7 350.9L359 351L288.8 347.4L288.6 347.4L2.4 347.7L0 133.8L0.2 6.3L245.8 6.6L250.8 6.6L313.4 7.3L395.4 0L401.7 23.4L411.7 60.8L419 95.1L418.6 108.6L416.6 108.8L416 111.5L418.3 139.4L418.3 147.2L416.9 160.8L417.1 195.6L415.3 219L409.7 251.7L404.7 287.1L399.8 346.2L399 346.8L397.7 354.6L391.3 354.8L390.8 352.8L389.3 351.7L386.2 353.8L385.5 351L377.1 350.9Z',
+      broward:'M297.7 545.8L289.7 546L289.8 553.5L274.2 553.3L218.5 553.5L101 553.5L101 541.5L6.5 541.2L6.5 529.7L3.1 388.3L2.4 347.7L288.6 347.4L288.8 347.4L359 351L368.7 350.9L370.1 350.9L370.6 350.9L374.9 351L377.1 350.9L385.5 351L386.2 353.8L389.3 351.7L390.8 352.8L391.3 354.8L397.7 354.6L397.5 355.9L395.2 385.6L392.4 393.8L390.6 403.3L384.7 449.2L382.8 477.4L382 479.1L381 481.7L380.7 482.3L379.3 500.9L376.7 537.4L376.6 543.5L376.5 543.5L373.7 543.9L368.8 544.1L368.8 543.6L364.7 543.8L364 543.8L313.4 545.3L297.7 545.8Z',
+      dade:'M218.5 553.5L274.2 553.3L289.8 553.5L289.7 546L297.7 545.8L313.4 545.3L364 543.8L364.7 543.8L368.8 543.6L368.8 544.1L373.7 543.9L376.5 543.5L376.6 543.5L376.6 575.9L375.1 593.7L375.7 616.7L374.6 629.3L371.9 643.9L371.7 654.3L367 666.3L363.8 671.4L359.4 692.2L358.9 702.9L359.7 706.4L358.4 712.6L355.5 712.9L347.7 701.9L350.9 688L353.8 681.8L352.9 677.9L349.7 673.1L343.9 668.9L337.5 669.5L322.1 676L316.6 680.5L314.5 684.4L311.6 700.3L304.1 716.5L303.5 720L298.5 728.1L293 731.7L288.9 736.2L286.6 741.1L284.6 752.1L284.6 761.8L286.3 766L280.5 781.6L275.3 783.5L273.2 785.1L268 803.3L268 814.6L269.2 821.7L273.5 834L277.3 837.3L274.4 845L274.7 858.6L277.3 862.2L282.2 863.2L284 866.1L282.2 872.2L270 891L261.6 895.9L257.1 897.2L251 902.7L246.6 911.4L245.2 918.5L228.9 932.1L219.8 937.8L215.2 940.6L207.5 947L205.1 949L204.8 949.3L204.1 950.1L197.5 957.7L195.4 962.5L195.1 963L195.1 963.1L191.6 967L191.2 966.9L190.1 966.7L189.9 966.7L187.8 965L187.7 965L185.5 963.2L185.3 963.1L182.9 957.6L182.1 957.1L181.8 956.9L179.3 955.4L177.9 955.8L176.6 956.6L174.5 957.9L169.2 956.8L168.7 954.8L169.2 953.1L169.3 950.5L165.5 946.8L160.7 945.4L154.6 945.3L145.6 953.8L146.3 962.5L147.7 966.4L143 970.3L139.5 973.3L135.5 976.6L130.9 979.1L123.6 979.4L120.7 979.5L120.5 979.5L120.2 979.7L119.4 980.1L117.8 980.9L117.7 981.2L116.4 983.3L116.1 983.8L112.3 984.1L110.5 984.2L106 984.6L103.8 984.7L101.1 984.9L99.1 985L96.9 986L93.7 989.9L90.6 995.9L89.4 1000L83.8 999L80.5 996.7L77.2 997.2L74.2 997.5L72.4 997.8L70.2 998.1L68.5 994.8L68.6 991.2L65.8 986.5L63 984.9L44.4 981.9L44.1 981.8L34.8 985.9L33.8 986.3L30.7 987.7L29.2 988.3L28.9 987.6L28.7 987.2L28.3 986.1L27.5 984.2L23.5 980.5L20.8 979.7L19.5 979.3L13.7 979.5L6.3 877.2L6.4 636.2L6.5 541.2L101 541.5L101 553.5L218.5 553.5Z'
+    };
+    var NAME={dade:'Miami-Dade County',broward:'Broward County',palm:'Palm Beach County'};
+    var PTS={"Miami":[339.4,653.2,"dade"],"Hialeah":[298.1,607.7,"dade"],"Miami Gardens":[314,561.6,"dade"],"Homestead":[200.3,820,"dade"],"North Miami":[342.9,589.9,"dade"],"Kendall":[278.8,705,"dade"],"Doral":[260.2,628.5,"dade"],"Cutler Bay":[264.4,758.8,"dade"],"Opa-locka":[311.7,583.3,"dade"],"Miami Beach":[370.7,644.2,"dade"],"Coral Gables":[302.8,682,"dade"],"Little Haiti":[340.4,626.2,"dade"],"Fort Lauderdale":[367.1,463.1,"broward"],"Hollywood":[361.1,523.8,"broward"],"Pembroke Pines":[280.9,522.9,"broward"],"Miramar":[320.5,537.5,"broward"],"Coral Springs":[301.7,381.8,"broward"],"Pompano Beach":[373.2,400,"broward"],"Davie":[310.8,488.2,"broward"],"Plantation":[320.1,460.2,"broward"],"Sunrise":[308.7,438.8,"broward"],"Tamarac":[312,413.7,"broward"],"Lauderhill":[329.8,453.3,"broward"],"Deerfield Beach":[385.5,356.1,"broward"],"West Palm Beach":[408.2,139.3,"palm"],"Boca Raton":[371.2,328.8,"palm"],"Delray Beach":[398.7,277.9,"palm"],"Boynton Beach":[401.8,243,"palm"],"Lake Worth":[400.9,193.1,"palm"],"Riviera Beach":[405.9,106.6,"palm"],"Jupiter":[388.2,19.8,"palm"],"Wellington":[302.9,168.6,"palm"],"Palm Beach Gardens":[366.4,80.3,"palm"]};
+
+    var box=document.createElement('div');
+    box.id='cityMap';
+    box.setAttribute('aria-hidden','true');
+    box.innerHTML=
+      '<div class="cm-name"><span id="cmCity"></span> <span class="cm-zip" id="cmZip"></span></div>'+
+      '<svg id="cmSvg" viewBox="-32 -40 483 1080" width="150" height="335" aria-hidden="true" focusable="false">'+
+        '<path class="cm-co" id="cm-palm" d="'+D.palm+'"/>'+
+        '<path class="cm-co" id="cm-broward" d="'+D.broward+'"/>'+
+        '<path class="cm-co" id="cm-dade" d="'+D.dade+'"/>'+
+        '<circle class="cm-ring" id="cmRing" cx="-99" cy="-99" r="18">'+
+          '<animate attributeName="r" values="24;62" dur="1.7s" repeatCount="indefinite"/>'+
+          '<animate attributeName="opacity" values="1;0" dur="1.7s" repeatCount="indefinite"/>'+
+        '</circle>'+
+        '<circle class="cm-dot" id="cmDot" cx="-99" cy="-99" r="24"/>'+
+      '</svg>'+
+      '<div class="cm-county" id="cmCounty"></div>';
+    document.body.appendChild(box);
+
+    var svg=box.querySelector('#cmSvg'), ring=box.querySelector('#cmRing'),
+        dot=box.querySelector('#cmDot'), elCity=box.querySelector('#cmCity'),
+        elZip=box.querySelector('#cmZip'), elCo=box.querySelector('#cmCounty');
+    var W=174, cur=null, hideT=null;
+
+    function place(chip){
+      var r=chip.getBoundingClientRect();
+      var H=box.offsetHeight||420;
+      var vw=document.documentElement.clientWidth||window.innerWidth;
+      var vh=window.innerHeight||document.documentElement.clientHeight;
+      var x=r.left+r.width/2-W/2;
+      if(x<10) x=10;
+      if(x>vw-W-10) x=Math.max(10,vw-W-10);
+      var y=r.top-H-12, org='50% 100%';
+      if(y<8){ y=r.bottom+12; org='50% 0%'; }
+      if(y+H>vh-8){ y=Math.max(8,vh-H-8); }
+      box.style.transformOrigin=org;
+      box.style.left=Math.round(x)+'px';
+      box.style.top=Math.round(y)+'px';
+    }
+
+    function show(chip){
+      clearTimeout(hideT);
+      var p=PTS[chip.dataset.city];
+      if(!p){ return; }
+      cur=chip;
+      elCity.textContent=chip.dataset.city;
+      elZip.textContent=chip.dataset.zip;
+      elCo.textContent=NAME[p[2]];
+      ['dade','broward','palm'].forEach(function(k){
+        box.querySelector('#cm-'+k).setAttribute('class','cm-co');
+      });
+      var hit=box.querySelector('#cm-'+p[2]);
+      hit.setAttribute('class','cm-co hit');
+      svg.insertBefore(hit,ring);
+      dot.setAttribute('cx',p[0]); dot.setAttribute('cy',p[1]);
+      ring.setAttribute('cx',p[0]); ring.setAttribute('cy',p[1]);
+      place(chip);
+      box.classList.add('on');
+    }
+    function hide(){
+      clearTimeout(hideT);
+      hideT=setTimeout(function(){ box.classList.remove('on'); cur=null; },110);
+    }
+    function reflow(){ if(cur && box.classList.contains('on')) place(cur); }
+
+    chips.forEach(function(c){
+      c.addEventListener('mouseenter',function(){show(c);});
+      c.addEventListener('mouseleave',hide);
+      c.addEventListener('focus',function(){show(c);});
+      c.addEventListener('blur',hide);
+    });
+    window.addEventListener('scroll',reflow,{passive:true});
+    window.addEventListener('resize',reflow);
   })();
 
 
