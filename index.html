@@ -339,18 +339,24 @@ table tbody td{transition:background .16s ease,color .16s ease,box-shadow .16s e
 
 /* ticker */
 .ticker{
-  overflow:hidden;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16);
-  background:rgba(0,0,0,.20);margin:34px 0 0;padding:14px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  overflow:hidden;
+  border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  background:linear-gradient(90deg,#12233A 0%,#1E3D63 50%,#12233A 100%);
+  margin:36px 0 0;padding:15px 0;position:relative;
 }
-.ticker-track{display:flex;width:max-content;animation:tape 26s linear infinite}
+.ticker::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(233,180,76,.16),rgba(127,188,236,.10) 50%,rgba(233,180,76,.16));
+}
+.ticker-track{display:flex;width:max-content;animation:tape 44s linear infinite;position:relative;z-index:1}
 .ticker:hover .ticker-track{animation-play-state:paused}
 .ticker-item{
-  display:inline-flex;align-items:center;gap:14px;padding:0 28px;white-space:nowrap;
-  font-weight:800;font-size:clamp(.92rem,1.4vw,1.08rem);letter-spacing:-.01em;color:#fff;
+  display:inline-flex;align-items:center;gap:13px;padding:0 26px;white-space:nowrap;
+  font-weight:800;font-size:clamp(.9rem,1.35vw,1.05rem);letter-spacing:-.01em;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
-.ticker-item i{font-style:normal;color:var(--gold);font-size:1.1em;line-height:1}
+.ticker-item i{font-style:normal;color:var(--gold);font-size:.8em;line-height:1;transform:translateY(-1px)}
+.ticker-item em{font-style:normal;color:var(--gold)}
 @keyframes tape{ from{transform:translateX(-50%)} to{transform:translateX(0)} }
 @media (prefers-reduced-motion:reduce){
   .ticker-track{animation:none;width:100%;justify-content:center;flex-wrap:wrap}
@@ -396,27 +402,48 @@ tbody tr:last-child td{border-bottom:0}
 /* probate arm link-out */
 .pae-link{
   display:flex;align-items:center;gap:16px;margin-top:26px;text-decoration:none;color:inherit;
-  background:linear-gradient(135deg,rgba(127,188,236,.18),rgba(255,255,255,.05));
-  border:1px solid rgba(127,188,236,.38);border-radius:var(--r);padding:18px 20px;
+  cursor:pointer;position:relative;
+  background:linear-gradient(135deg,rgba(127,188,236,.26),rgba(127,188,236,.10));
+  border:2px dashed var(--sky);border-radius:var(--r);padding:20px 22px;
   transition:transform .18s var(--lift),border-color .18s,background .18s,box-shadow .18s;
 }
-.pae-link:hover{
-  transform:translateY(-4px);border-color:var(--sky);
-  background:linear-gradient(135deg,rgba(127,188,236,.30),rgba(255,255,255,.08));
-  box-shadow:0 16px 36px -10px rgba(0,0,0,.5);
+.pae-link:hover,.pae-link:focus-visible{
+  transform:translateY(-4px);border-style:solid;border-color:var(--gold);
+  background:linear-gradient(135deg,rgba(233,180,76,.26),rgba(127,188,236,.14));
+  box-shadow:0 18px 40px -10px rgba(0,0,0,.55);
 }
 .pae-badge{
-  flex:0 0 auto;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink);background:var(--sky);padding:6px 10px;border-radius:6px;
+  align-self:flex-start;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);background:var(--sky);padding:5px 10px;border-radius:6px;margin-bottom:9px;
 }
-.pae-body{display:flex;flex-direction:column;gap:3px;min-width:0}
-.pae-body b{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:#fff}
+.pae-link:hover .pae-badge{background:var(--gold)}
+.pae-body{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+
+.pae-body b{
+  font-size:1.12rem;font-weight:800;letter-spacing:-.02em;color:#fff;
+  display:inline-flex;align-items:center;gap:8px;text-decoration:underline;
+  text-decoration-color:var(--sky);text-underline-offset:4px;text-decoration-thickness:2px;
+}
+.pae-link:hover .pae-body b{text-decoration-color:var(--gold)}
+.pae-ext{width:15px;height:15px;flex:0 0 auto;opacity:.9}
 .pae-body span{font-size:.9rem;color:#C2D5EA}
-.pae-arrow{width:22px;height:22px;flex:0 0 auto;margin-left:auto;color:var(--sky);transition:transform .18s var(--lift)}
-.pae-link:hover .pae-arrow{transform:translateX(5px)}
-@media (max-width:520px){
-  .pae-link{flex-wrap:wrap;gap:12px}
-  .pae-arrow{margin-left:0}
+.pae-go{
+  flex:0 0 auto;margin-left:auto;display:inline-flex;align-items:center;gap:8px;
+  background:var(--sky);color:#0E2136;font-weight:800;font-size:.9rem;
+  padding:11px 17px;border-radius:10px;white-space:nowrap;
+  transition:background .18s,transform .18s var(--lift);
+}
+.pae-go svg{width:16px;height:16px;transition:transform .18s var(--lift)}
+.pae-link:hover .pae-go{background:var(--gold);color:#2A1C00}
+.pae-link:hover .pae-go svg{transform:translateX(4px)}
+.pae-note{
+  display:block;margin-top:9px;font-size:.78rem;font-weight:600;color:#9BB2CD;
+  display:flex;align-items:center;gap:7px;
+}
+.pae-note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sky);flex:0 0 auto}
+@media (max-width:640px){
+  .pae-link{flex-wrap:wrap;gap:13px}
+  .pae-go{margin-left:0;width:100%;justify-content:center}
 }
 
 /* ---------- founder ---------- */
@@ -916,7 +943,7 @@ details:hover summary::after{border-color:var(--ink-3)}
       <div class="proof-cell">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <b>Local, not a call center</b>
-        <span>We live and buy here. You talk to the person writing the check.</span>
+        <span>We live and buy here. You talk to the person making the offer.</span>
       </div>
       <div class="proof-cell">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -1034,9 +1061,9 @@ details:hover summary::after{border-color:var(--ink-3)}
           <tr><td>Repairs &amp; cleaning</td><td class="us"><span class="tick">None. Leave everything.</span></td><td>Required before listing</td><td>Usually none</td></tr>
           <tr><td>Showings</td><td class="us"><span class="tick">Zero</span></td><td>Dozens, plus open houses</td><td>Zero</td></tr>
           <tr><td>Renegotiation after inspection</td><td class="us"><span class="tick">Never. Price is locked.</span></td><td>Common</td><td><span class="cross">Very common</span></td></tr>
-          <tr><td>Risk of falling through</td><td class="us"><span class="tick">None. Our own funds.</span></td><td>15%+ fall through on financing</td><td><span class="cross">High if they cannot fund</span></td></tr>
+          <tr><td>Who funds your closing</td><td class="us"><span class="tick">We tell you up front, before you sign</span></td><td>A bank, and 15%+ fall through</td><td><span class="cross">You often never find out</span></td></tr>
           <tr><td>Will they tell you to list instead?</td><td class="us"><span class="tick">Yes, when it is true</span></td><td>Never</td><td>Never</td></tr>
-          <tr><td>Who you actually deal with</td><td class="us"><span class="tick">The buyer, directly</span></td><td>Your agent, then the buyer's agent</td><td>Often a call center rep</td></tr>
+          <tr><td>Who you actually deal with</td><td class="us"><span class="tick">Jeff, start to finish</span></td><td>Your agent, then the buyer's agent</td><td>Often a call center rep</td></tr>
         </tbody>
       </table>
     </div>
@@ -1084,13 +1111,19 @@ details:hover summary::after{border-color:var(--ink-3)}
         <p class="lede">You can start before probate is finished. You do not have to clean it out. And you do not have to pay a lawyer up front to get moving.</p>
 
         <a class="pae-link" href="https://jeffinvest007.github.io/probate-assets-elite/" target="_blank" rel="noopener">
-          <span class="pae-badge">Our probate arm</span>
           <span class="pae-body">
-            <b>Go to Probate Assets Elite</b>
+            <span class="pae-badge">Our probate arm</span>
+            <b>Visit Probate Assets Elite
+              <svg class="pae-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            </b>
             <span>Everything on Florida probate, estates and heirs, in one place.</span>
           </span>
-          <svg class="pae-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <span class="pae-go">
+            Open site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
         </a>
+        <span class="pae-note">Opens our probate site in a new tab</span>
 
         <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn btn-gold" href="#offer-form">Talk to us about the estate</a>
@@ -1105,7 +1138,7 @@ details:hover summary::after{border-color:var(--ink-3)}
         </div>
         <div class="pq-item">
           <h3>I cannot afford to start probate.</h3>
-          <p>Most people can't, and that is exactly why these houses sit for years. <strong>We will connect you with a South Florida probate attorney at no upfront cost to you.</strong> They get paid at closing, out of the sale proceeds. Nothing out of pocket.</p>
+          <p>Most people can't, and that is exactly why these houses sit for years. Here is the part nobody tells you: <strong>many South Florida probate attorneys will take an estate with a sale in motion and get paid at closing out of the proceeds.</strong> Nothing out of your pocket. We have our own attorney and you should have your own, since we sit on opposite sides of the table. If you do not have one, ask and we will hand you a few names to choose from.</p>
         </div>
         <div class="pq-item">
           <h3>My brothers and sisters cannot agree.</h3>
@@ -1132,7 +1165,9 @@ details:hover summary::after{border-color:var(--ink-3)}
         <span class="eyebrow">Who you are calling</span>
         <h2>You are not calling a call center. You are calling Jeff.</h2>
         <p class="lede">Probate Assets Elite is a South Florida company. When you call (786) 920-7419, you get the person who will actually walk your property, run your numbers, and put the offer in writing. Not a script reader in another state who is going to hand your information off to four other people.</p>
-        <p class="lede">We buy houses across Miami-Dade, Broward and Palm Beach in just about any situation. Tired of being a landlord, storm damage, a divorce, a job in another state, payments you cannot catch up on, repairs that cost more than the house is worth, or a property you simply do not want to own anymore. Whatever brought you here, you get a straight number and a real closing date.</p>
+        <p class="lede">Most people who call me are not calling on a good day. Something broke, somebody left, a bill came due, or a house they never asked for landed in their lap. I have sat in a lot of those living rooms.</p>
+        <p class="lede">So here is how I work. <strong>Nobody gets rushed, nobody gets a pitch, and nobody gets a lecture about the condition of their property.</strong> Whatever it looks like behind that front door, I have seen worse and I bought it anyway. You will never hear me gasp at a roof or make a face about a smell. It is a house. Houses get old and life gets hard, and neither one is your fault.</p>
+        <p class="lede">What you get from me is a straight number, the reasoning behind it, and a closing date you choose. If I think you would do better listing it, I will tell you that instead, and I will tell you why.</p>
         <p class="lede">And to be clear about how the money works: <strong>we do not hand you a check across a kitchen table.</strong> Every deal closes at a licensed South Florida title company, and the title company is who verifies the title, handles the payoff, and wires your funds. That protects you a lot more than a handshake does.</p>
         <p class="sig">Jeff<span>Founder, Probate Assets Elite LLC &middot; The Cash Home Offer</span></p>
       </div>
@@ -1196,7 +1231,7 @@ details:hover summary::after{border-color:var(--ink-3)}
         <div class="ans">
           <p>Yes, both.</p>
           <p><strong>Español:</strong> Llámenos al (786) 920-7419. Hablamos español y criollo haitiano, y podemos atenderle en el idioma que usted prefiera. La consulta es gratis y sin ningún compromiso.</p>
-          <p><strong>Kreyòl:</strong> Rele nou nan (786) 920-7419. Nou pale panyòl ak kreyòl ayisyen, epi nou ka ede w nan lang ou pi alèz la. Konsiltasyon an gratis e ou pa gen okenn obligasyon.</p>
+          <p><strong>Kreyòl:</strong> Rele nou nan (786) 920-7419. Nou pale kreyòl, epi nou ka ede'w nan lang ou pi alèz la. Konsiltasyon an gratis, e ou pa gen okenn obligasyon.</p>
         </div>
       </details>
     </div>
@@ -1216,14 +1251,26 @@ details:hover summary::after{border-color:var(--ink-3)}
 
   <div class="ticker" aria-label="Free, no obligation, written number in 24 hours">
     <div class="ticker-track" id="tickerTrack">
-      <span class="ticker-item"><i>&#9670;</i> Free, no obligation</span>
-      <span class="ticker-item"><i>&#9670;</i> A written number in 24 hours</span>
-      <span class="ticker-item"><i>&#9670;</i> Worst case, you learn what your options are</span>
-      <span class="ticker-item"><i>&#9670;</i> Zero fees, zero commissions</span>
-      <span class="ticker-item"><i>&#9670;</i> We pay the closing costs</span>
-      <span class="ticker-item"><i>&#9670;</i> Close in as little as 7 days</span>
-      <span class="ticker-item"><i>&#9670;</i> Any condition, any situation</span>
-      <span class="ticker-item"><i>&#9670;</i> Everything you tell us stays confidential</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>Free</em> and no obligation</span>
+      <span class="ticker-item"><i>&#9670;</i> A written number in <em>24 hours</em></span>
+      <span class="ticker-item"><i>&#9670;</i> Close in as little as <em>7 days</em></span>
+      <span class="ticker-item"><i>&#9670;</i> <em>$0</em> commissions</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>$0</em> fees</span>
+      <span class="ticker-item"><i>&#9670;</i> We pay <em>all</em> the closing costs</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>Zero</em> repairs</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>Zero</em> cleaning, leave everything</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>Zero</em> showings and open houses</span>
+      <span class="ticker-item"><i>&#9670;</i> <em>You</em> pick the closing date</span>
+      <span class="ticker-item"><i>&#9670;</i> The price is <em>locked</em>, no renegotiating</span>
+      <span class="ticker-item"><i>&#9670;</i> We tell you who is <em>funding</em> your closing</span>
+      <span class="ticker-item"><i>&#9670;</i> Closed at a <em>licensed</em> title company</span>
+      <span class="ticker-item"><i>&#9670;</i> Any condition, <em>any</em> situation</span>
+      <span class="ticker-item"><i>&#9670;</i> Behind on payments? <em>Still buying</em></span>
+      <span class="ticker-item"><i>&#9670;</i> Tenants, liens, violations? <em>Still buying</em></span>
+      <span class="ticker-item"><i>&#9670;</i> Out of state? <em>Handle it all by phone</em></span>
+      <span class="ticker-item"><i>&#9670;</i> Everything you tell us stays <em>confidential</em></span>
+      <span class="ticker-item"><i>&#9670;</i> If listing pays you more, <em>we say so</em></span>
+      <span class="ticker-item"><i>&#9670;</i> Call or text <em>7 days a week</em></span>
     </div>
   </div>
 </section>
