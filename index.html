@@ -877,6 +877,8 @@ body.menu-open .sticky{display:none}
   .hand-two{display:block;max-width:min(430px,92%)}
 }
 
+.if-autoreply{display:none}
+html.autoreply-on .if-autoreply{display:inline}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 
@@ -891,6 +893,30 @@ body.menu-open .sticky{display:none}
 }
 
 </style>
+<!-- ============ INSTANT THANK-YOU EMAIL TO THE SELLER ============
+     Paste your three EmailJS values between the quotes below and the
+     automatic thank-you turns itself on. Leave them blank and nothing
+     changes: leads still reach Jeff exactly as they do now.
+       service  = EmailJS "Service ID"   (looks like service_ab12cde)
+       template = EmailJS "Template ID"  (looks like template_xy34zzz)
+       key      = EmailJS "Public Key"   (looks like a random string)
+============================================================= -->
+<script>
+  window.THANKYOU = { service:"", template:"", key:"" };
+  (function(){
+    var C=window.THANKYOU;
+    if(!C || !C.service || !C.template || !C.key) return;
+    document.documentElement.classList.add("autoreply-on");
+    var s=document.createElement("script");
+    s.async=true;
+    s.src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    s.onload=function(){
+      try{ window.emailjs.init({publicKey:C.key}); window.__thanksReady=true; }catch(e){}
+    };
+    document.head.appendChild(s);
+  })();
+</script>
+
 <!-- ============ GOOGLE ANALYTICS 4 ============
      PASTE YOUR MEASUREMENT ID BELOW (looks like G-XXXXXXXXXX).
      Leave it as-is and nothing loads, nothing breaks.
@@ -912,7 +938,7 @@ body.menu-open .sticky{display:none}
 
 </head>
 <body>
-<!-- build 2026-08-08e -->
+<!-- build 2026-08-08f -->
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
 
 <!-- ================= UTILITY BAR ================= -->
@@ -1039,7 +1065,7 @@ body.menu-open .sticky{display:none}
               <span class="cf-count">Step 1 of 3</span>
               <div class="fld">
                 <label for="address">What is the property address?</label>
-                <p class="hint">Street, city and ZIP is plenty. We will pull the rest.</p>
+                <p class="hint">Street and city at minimum. ZIP helps. We will pull the rest.</p>
                 <input type="text" id="address" name="Property Address" placeholder="1234 NW 12th St, Miami, FL 33125" autocomplete="street-address" inputmode="text">
                 <div class="err-msg" id="e1">Please enter the property address so we can run the numbers.</div>
               </div>
@@ -1106,8 +1132,26 @@ body.menu-open .sticky{display:none}
                 <div class="err-msg" id="e4">Please enter a valid 10-digit phone number.</div>
               </div>
               <div class="fld">
-                <label for="email">Email <span style="font-weight:500;color:var(--faint)">(optional, for the written offer)</span></label>
-                <input type="email" id="email" name="Email" placeholder="you@email.com" autocomplete="email" inputmode="email">
+                <label for="email">Email address</label>
+                <p class="hint">Your written offer goes here.<span class="if-autoreply"> We email you a confirmation the second you hit send.</span></p>
+                <input type="email" id="email" name="Email" placeholder="you@gmail.com" autocomplete="email" inputmode="email">
+                <div class="err-msg" id="e5">Please enter a real email address. That is where your written offer goes.</div>
+              </div>
+              <div class="fld">
+                <label for="heard">How did you hear about us?</label>
+                <select id="heard" name="How They Heard">
+                  <option value="">Choose one</option>
+                  <option>Sticky note left at my property</option>
+                  <option>Letter or postcard in the mail</option>
+                  <option>Google or another search</option>
+                  <option>Sign on the road</option>
+                  <option>Facebook or Instagram</option>
+                  <option>A friend or family member told me</option>
+                  <option>An attorney, agent or investor sent me</option>
+                  <option>I have spoken with Jeff before</option>
+                  <option>Somewhere else</option>
+                </select>
+                <div class="err-msg" id="e6">Please pick one. Knowing how you found us helps more than you would think.</div>
               </div>
               <button type="submit" class="btn btn-gold btn-lg" id="submitBtn">Get My Cash Offer</button>
               <div class="microcopy">
@@ -1653,7 +1697,7 @@ body.menu-open .sticky{display:none}
 
   function save(){
     var d={};
-    ["address","condition","name","phone","email"].forEach(function(id){
+    ["address","condition","name","phone","email","heard"].forEach(function(id){
       var el=document.getElementById(id); if(el) d[id]=el.value;
     });
     var sit=form.querySelector('input[name="Situation"]:checked');
@@ -1663,7 +1707,7 @@ body.menu-open .sticky{display:none}
   }
 
   function restore(d,goStep){
-    ["address","condition","name","phone","email"].forEach(function(id){
+    ["address","condition","name","phone","email","heard"].forEach(function(id){
       var el=document.getElementById(id); if(el && d[id]) el.value=d[id];
     });
     if(d.situation){ var s=form.querySelector('input[name="Situation"][value="'+d.situation+'"]'); if(s) s.checked=true; }
@@ -1689,14 +1733,90 @@ body.menu-open .sticky{display:none}
     }
   })();
 
+  /* =======================================================
+     [VALIDATION] real email, real address, required source
+  ======================================================= */
+  var SERVICE_CITIES=["palm beach gardens","southwest ranches","sunny isles beach","north miami beach","lighthouse point","lauderdale lakes","north palm beach","royal palm beach","north lauderdale","hallandale beach","fort lauderdale","deerfield beach","west palm beach","hialeah gardens","highland beach","pembroke pines","boynton beach","coconut grove","miami springs","jupiter farms","wilton manors","coral springs","riviera beach","pompano beach","coconut creek","miami gardens","little havana","golden glades","palmetto bay","liberty city","coral gables","little haiti","florida city","delray beach","oakland park","palm springs","leisure city","canal point","north miami","dania beach","miami lakes","belle glade","loxahatchee","south miami","miami beach","westchester","cooper city","lauderhill","palm beach","boca raton","plantation","cutler bay","greenacres","allapattah","sweetwater","west miami","wellington","lake worth","south bay","lake park","pinecrest","hollywood","haverhill","opa-locka","homestead","tequesta","aventura","parkland","miramar","margate","sunrise","pahokee","naranja","tamarac","jupiter","lantana","kendall","hialeah","weston","davie","doral","miami"];
+  var MAIL_TYPO={"gmial.com":"gmail.com","gmai.com":"gmail.com","gmil.com":"gmail.com","gmaill.com":"gmail.com",
+    "gnail.com":"gmail.com","gmal.com":"gmail.com","gamil.com":"gmail.com","gmail.co":"gmail.com","gmail.cm":"gmail.com",
+    "gmail.con":"gmail.com","gmail.om":"gmail.com","gmailc.om":"gmail.com","gmaol.com":"gmail.com",
+    "yahho.com":"yahoo.com","yaho.com":"yahoo.com","yahooo.com":"yahoo.com","yhaoo.com":"yahoo.com",
+    "yahoo.co":"yahoo.com","yahoo.con":"yahoo.com","yahoo.om":"yahoo.com","ymail.co":"ymail.com",
+    "hotmial.com":"hotmail.com","hotmai.com":"hotmail.com","hotmall.com":"hotmail.com","hotmil.com":"hotmail.com",
+    "hotmail.co":"hotmail.com","hotmail.con":"hotmail.com","hotnail.com":"hotmail.com",
+    "outlok.com":"outlook.com","outloo.com":"outlook.com","outlook.co":"outlook.com","outlook.con":"outlook.com",
+    "iclod.com":"icloud.com","iclould.com":"icloud.com","icloud.co":"icloud.com","icoud.com":"icloud.com",
+    "aol.co":"aol.com","aol.con":"aol.com","comcast.ent":"comcast.net","comcast.com":"comcast.net",
+    "bellsouth.ent":"bellsouth.net","att.ent":"att.net","live.co":"live.com","msn.co":"msn.com"};
+  var MAIL_BURNER=["mailinator.com","guerrillamail.com","10minutemail.com","tempmail.com","temp-mail.org",
+    "yopmail.com","trashmail.com","sharklasers.com","getnada.com","maildrop.cc","throwawaymail.com",
+    "fakeinbox.com","dispostable.com","mailnesia.com","spamgourmet.com","emailondeck.com","moakt.com",
+    "tempr.email","discard.email","burnermail.io","mailcatch.com","1secmail.com","tmpmail.org",
+    "grr.la","mailsac.com","spam4.me","trbvm.com","mohmal.com","tempmailo.com","minuteinbox.com"];
+  var MAIL_FAKE=["test.com","test.net","test.org","example.com","example.net","example.org","asdf.com",
+    "fake.com","none.com","nope.com","xxx.com","abc.com","aaa.com","qwerty.com","sdf.com","a.com","aa.com",
+    "email.email","noemail.com","nomail.com","donotreply.com","fakemail.com","123.com"];
+  var MAIL_JUNKUSER=["test","testing","asdf","asdfasdf","aaa","aaaa","abc","abcd","qwerty","none","na","nope",
+    "xxx","x","a","aa","1","12","123","noemail","nomail","no","fake","fakeemail","dontemail","anonymous","null"];
+
+  function checkEmail(v){
+    v=(v||"").trim();
+    if(!v) return {ok:false,msg:"Please add your email. That is where the written offer goes."};
+    if(/\s/.test(v)) return {ok:false,msg:"There is a space in that email. Take another look?"};
+    var m=/^([A-Za-z0-9._%+\-]{1,64})@([A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+)$/.exec(v);
+    if(!m) return {ok:false,msg:"That does not look like a working email. It should look like yourname@gmail.com"};
+    var user=m[1].toLowerCase(), dom=m[2].toLowerCase();
+    if(v.indexOf("..")>-1 || user.charAt(0)==="." || user.charAt(user.length-1)===".")
+      return {ok:false,msg:"There is a stray dot in that email. Take another look?"};
+    var tld=dom.split(".").pop();
+    if(!/^[a-z]{2,24}$/.test(tld)) return {ok:false,msg:"That email is missing a real ending like .com or .net"};
+    if(dom.split(".").length<2 || dom.split(".")[0].length<1)
+      return {ok:false,msg:"That does not look like a working email. It should look like yourname@gmail.com"};
+    if(MAIL_TYPO[dom]) return {ok:false,fix:user+"@"+MAIL_TYPO[dom],msg:"Did you mean "};
+    if(MAIL_BURNER.indexOf(dom)>-1)
+      return {ok:false,msg:"Please use an email you actually check. Your offer and the paperwork go there."};
+    if(MAIL_FAKE.indexOf(dom)>-1 || MAIL_JUNKUSER.indexOf(user)>-1)
+      return {ok:false,msg:"We need a real email so your written offer reaches you. No spam from us, ever."};
+    return {ok:true};
+  }
+
+  function checkAddress(v){
+    v=(v||"").trim();
+    if(v.length<6) return {ok:false,msg:"Please enter the property address so we can run the numbers."};
+    if(!/\d/.test(v)) return {ok:false,msg:"Please include the street number too."};
+    var lo=v.toLowerCase();
+    var hasCity=false;
+    for(var i=0;i<SERVICE_CITIES.length;i++){ if(lo.indexOf(SERVICE_CITIES[i])>-1){ hasCity=true; break; } }
+    var zips=v.match(/\b\d{5}\b/g);
+    var hasZip=!!(zips && (zips.length>1 || v.indexOf(zips[0])>0));
+    var hasComma=/,\s*[A-Za-z]{3,}/.test(v);
+    if(!(hasCity||hasZip||hasComma))
+      return {ok:false,msg:"Add the city as well so we pull comps from the right neighborhood. Example: 1234 NW 12th St, Miami"};
+    return {ok:true};
+  }
+
+  function setErr(id,res,el){
+    var box=document.getElementById(id);
+    if(!box) return;
+    if(res.ok){ box.classList.remove("on"); mark(el,false); return; }
+    if(res.fix){
+      box.innerHTML=res.msg+'<b>'+res.fix+'</b>? <a href="#" class="fix-link">Yes, use that</a>';
+      var a=box.querySelector(".fix-link");
+      a.addEventListener("click",function(ev){
+        ev.preventDefault(); el.value=res.fix; setErr(id,checkEmail(el.value),el); el.focus();
+      });
+    } else { box.textContent=res.msg; }
+    box.classList.add("on"); mark(el,true);
+  }
+
   /* step navigation */
   document.querySelectorAll("[data-next]").forEach(function(b){
     b.addEventListener("click",function(){
       var n=+b.dataset.next, ok=true;
       if(n===1){
         var a=document.getElementById("address");
-        var bad=a.value.trim().length<6;
-        err("e1",bad); mark(a,bad); if(bad){ a.focus(); ok=false; }
+        var r1=checkAddress(a.value);
+        setErr("e1",r1,a); if(!r1.ok){ a.focus(); ok=false; }
       }
       if(n===2){
         var c=document.getElementById("condition");
@@ -1723,6 +1843,17 @@ body.menu-open .sticky{display:none}
   form.addEventListener("input",save);
   form.addEventListener("change",save);
 
+
+  /* live validation feedback */
+  (function(){
+    var em=document.getElementById("email"), hd=document.getElementById("heard"), ad=document.getElementById("address");
+    if(em){
+      em.addEventListener("blur",function(){ if(em.value.trim()) setErr("e5",checkEmail(em.value),em); });
+      em.addEventListener("input",function(){ if(em.classList.contains("err")) setErr("e5",checkEmail(em.value),em); });
+    }
+    if(hd) hd.addEventListener("change",function(){ err("e6",!hd.value); mark(hd,!hd.value); });
+    if(ad) ad.addEventListener("input",function(){ if(ad.classList.contains("err")) setErr("e1",checkAddress(ad.value),ad); });
+  })();
   /* phone formatting */
   var ph=document.getElementById("phone");
   if(ph) ph.addEventListener("input",function(){
@@ -1737,12 +1868,19 @@ body.menu-open .sticky{display:none}
   form.addEventListener("submit",function(e){
     e.preventDefault();
     var nm=document.getElementById("name"), pn=document.getElementById("phone");
+    var em=document.getElementById("email"), hd=document.getElementById("heard");
     var badN=nm.value.trim().length<2;
     var badP=digits(pn.value).length!==10;
+    var rE=checkEmail(em.value);
+    var badH=!hd.value;
     err("e3",badN); mark(nm,badN);
     err("e4",badP); mark(pn,badP);
+    setErr("e5",rE,em);
+    err("e6",badH); mark(hd,badH);
     if(badN){ nm.focus(); return; }
     if(badP){ pn.focus(); return; }
+    if(!rE.ok){ em.focus(); return; }
+    if(badH){ hd.focus(); return; }
 
     var btn=document.getElementById("submitBtn");
     btn.disabled=true; btn.textContent="Sending your request...";
@@ -1759,11 +1897,30 @@ body.menu-open .sticky{display:none}
     fetch("https://api.web3forms.com/submit",{method:"POST",body:fd})
       .then(function(r){ return r.json(); })
       .then(function(j){
-        if(j && j.success){ track('generate_lead',{campaign:CAMPAIGN}); finish(); }
+        if(j && j.success){
+          track('generate_lead',{campaign:CAMPAIGN});
+          sendThankYou({
+            to_email:em.value.trim(), to_name:nm.value.trim(), from_name:"Jeff",
+            address:addrVal, phone:pn.value, situation:sitV, timeline:tlV,
+            heard:hd.value, reply_to:"probateassetselite@gmail.com"
+          });
+          finish();
+        }
         else { fail(btn); }
       })
       .catch(function(){ fail(btn); });
   });
+
+  /* instant thank-you to the seller. Silent no-op until EmailJS is configured,
+     and it can never block or break the lead going to Jeff. */
+  function sendThankYou(v){
+    try{
+      var C=window.THANKYOU||{};
+      if(!window.__thanksReady || !window.emailjs || !C.service || !C.template) return;
+      var r=window.emailjs.send(C.service,C.template,v);
+      if(r && r.catch) r.catch(function(){});
+    }catch(e){}
+  }
 
   function finish(){
     store.del(KEY);
