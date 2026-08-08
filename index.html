@@ -883,6 +883,25 @@ body.menu-open .sticky{display:none}
 
 .if-autoreply{display:none}
 html.autoreply-on .if-autoreply{display:inline}
+
+/* ================= FAQ: every other answer stays navy ================= */
+.faq details:nth-of-type(2n+3){
+  background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 100%);
+  border-color:var(--ink);
+}
+.faq details:nth-of-type(2n+3) summary{color:#fff}
+.faq details:nth-of-type(2n+3) summary::after{border-color:var(--gold)}
+.faq details:nth-of-type(2n+3) .ans{color:#C6D8EC}
+.faq details:nth-of-type(2n+3) .ans strong,
+.faq details:nth-of-type(2n+3) .ans b{color:#fff}
+.faq details:nth-of-type(2n+3) .ans a{color:var(--gold)}
+.faq details:nth-of-type(2n+3)[open]{border-color:var(--gold-2)}
+.faq details:nth-of-type(2n+3):hover{
+  border-color:var(--gold);
+  box-shadow:0 12px 30px -8px rgba(20,40,63,.42),0 3px 8px rgba(20,40,63,.22);
+}
+.faq details:nth-of-type(2n+3):hover summary::after{border-color:var(--gold)}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 
@@ -942,7 +961,7 @@ html.autoreply-on .if-autoreply{display:inline}
 
 </head>
 <body>
-<!-- build 2026-08-08p -->
+<!-- build 2026-08-08q -->
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
 
 <!-- ================= HEADER ================= -->
@@ -1482,16 +1501,16 @@ html.autoreply-on .if-autoreply{display:inline}
         <div class="ans"><p>Miami-Dade, Broward and Palm Beach counties. That includes Miami, Hialeah, Miami Gardens, Homestead, North Miami, Fort Lauderdale, Hollywood, Pembroke Pines, Coral Springs, Pompano Beach, Davie, Miramar, Plantation, Sunrise, West Palm Beach, Boca Raton, Delray Beach, Boynton Beach, Lake Worth, Jupiter, and everything in between. Single family, townhome, condo, duplex, multifamily, and vacant land.</p><p>We have also recently set up in the Dallas and Fort Worth, Texas area. If your property is out that way, call us and we will take a look.</p></div>
       </details>
       <details>
-        <summary>Am I obligated to anything if I request an offer?</summary>
-        <div class="ans"><p>No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away. Nobody is going to hound you, and everything you tell us is confidential.</p></div>
-      </details>
-      <details>
         <summary>Do you speak Creole and Spanish?</summary>
         <div class="ans">
           <p>Yes, both.</p>
           <p><strong>Kreyòl:</strong> Rele nou nan (786) 920-7419. Nou pale kreyòl, epi nou ka ede'w nan lang ou pi alèz la. Konsiltasyon an gratis, e ou pa gen okenn obligasyon.</p>
           <p><strong>Español:</strong> Llámenos al (786) 920-7419. Hablamos español y criollo haitiano, y podemos atenderle en el idioma que usted prefiera. La consulta es gratis y sin ningún compromiso.</p>
         </div>
+      </details>
+      <details>
+        <summary>Am I obligated to anything if I request an offer?</summary>
+        <div class="ans"><p>No. Getting the offer is free and there is no obligation whatsoever. Take it, sit on it, use it as a benchmark against what an agent tells you, or throw it away. Nobody is going to hound you, and everything you tell us is confidential.</p></div>
       </details>
     </div>
   </div>
