@@ -556,7 +556,8 @@ footer{background:#0E1E31;color:#9BB2CD;font-size:.9rem;padding:56px 0 130px}
 .foot-logo .logo-txt b{color:#fff}
 .foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:.8rem;line-height:1.7;color:#7C93B0}
 .foot-bot p{margin-bottom:10px}
-.areas{font-size:.82rem;line-height:1.9;color:#7C93B0}
+.foot-tel{color:var(--gold)!important;font-weight:800;font-size:1.18rem;letter-spacing:-.01em;margin-bottom:10px!important}
+.foot-note{font-size:.82rem;line-height:1.75;color:#7C93B0;margin-top:16px}
 
 /* ---------- sticky mobile bar ---------- */
 .sticky{
@@ -859,6 +860,19 @@ body.menu-open .sticky{display:none}
 #cityMap .cm-dot{fill:var(--gold);stroke:#0B1B2E;stroke-width:7;paint-order:stroke}
 @media (prefers-reduced-motion:reduce){#cityMap .cm-ring{display:none}}
 
+
+/* ================= [TYPEWRITER] #formula headline types itself in ================= */
+#formula h2 .tw-c{visibility:hidden}
+#formula h2 .tw-c.on{visibility:visible}
+#formula h2 .tw-caret{display:inline-block;width:0;height:1em;position:relative;vertical-align:-.12em}
+#formula h2 .tw-caret::after{
+  content:"";position:absolute;left:1px;top:.05em;bottom:.03em;
+  width:3px;background:var(--gold);border-radius:2px;
+  animation:twBlink .8s steps(1,end) infinite;
+}
+#formula h2 .tw-caret.fade::after{animation:none;opacity:0;transition:opacity .5s ease}
+@keyframes twBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 
@@ -919,7 +933,7 @@ body.menu-open .sticky{display:none}
       </a>
       <div class="nav-links">
         <a href="#how">How It Works</a>
-        <a href="#formula">Straight Talk</a>
+        <a href="#formula">Real Talk</a>
         <a href="#compare">Compare</a>
         <a href="#probate">Probate</a>
         <a href="#about">Meet Jeff</a>
@@ -951,7 +965,7 @@ body.menu-open .sticky{display:none}
     </div>
     <a href="#offer-form"><span>Get My Cash Offer</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a href="#how"><span>How It Works</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <a href="#formula"><span>Straight Talk</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#formula"><span>Real Talk</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a href="#compare"><span>Compare Your Options</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a href="#situations"><span>Situations We Buy</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a href="#probate"><span>Probate &amp; Inherited</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -1214,7 +1228,7 @@ body.menu-open .sticky{display:none}
 <section class="sec formula-wrap" id="formula">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">Straight talk</span>
+      <span class="eyebrow">Real talk</span>
       <h2>What a cash offer really is</h2>
       <p class="lede">Most cash buyers dance around this. We would rather you hear it from us on the front end than figure it out later.</p>
     </div>
@@ -1483,10 +1497,6 @@ body.menu-open .sticky{display:none}
           <span class="logo-txt"><b>The Cash Home Offer</b><span>Probate Assets Elite LLC</span></span>
         </div>
         <p>We buy houses for cash across Miami-Dade, Broward and Palm Beach counties. Any condition, any situation, on your timeline.</p>
-        <p style="margin-top:14px">
-          <a href="tel:+17869207419" style="color:var(--gold);font-weight:800;font-size:1.1rem;display:inline">(786) 920-7419</a><br>
-          <a href="mailto:probateassetselite@gmail.com" style="display:inline">probateassetselite@gmail.com</a>
-        </p>
       </div>
       <div>
         <h4>The Site</h4>
@@ -1499,10 +1509,11 @@ body.menu-open .sticky{display:none}
         <a href="#offer-form">Get My Cash Offer</a>
       </div>
       <div>
-        <h4>Where We Buy</h4>
-        <p class="areas">
-          Miami &middot; Hialeah &middot; Miami Gardens &middot; Homestead &middot; North Miami &middot; Kendall &middot; Doral &middot; Cutler Bay &middot; Fort Lauderdale &middot; Hollywood &middot; Pembroke Pines &middot; Coral Springs &middot; Pompano Beach &middot; Davie &middot; Miramar &middot; Plantation &middot; Sunrise &middot; Tamarac &middot; West Palm Beach &middot; Boca Raton &middot; Delray Beach &middot; Boynton Beach &middot; Lake Worth &middot; Jupiter &middot; Wellington
-        </p>
+        <h4>Talk To Jeff</h4>
+        <a class="foot-tel" href="tel:+17869207419" data-track="call-footer">(786) 920-7419</a>
+        <a href="sms:+17869207419?&amp;body=Hi%20Jeff%2C%20I%20want%20a%20cash%20offer%20on%20my%20property%20at%3A%20">Text me instead</a>
+        <a href="mailto:probateassetselite@gmail.com">probateassetselite@gmail.com</a>
+        <p class="foot-note">Call or text 7 days a week, 8am to 8pm. Miss me and I call back the same day.<br>Se habla espa&ntilde;ol &middot; Nou pale Kreòl</p>
       </div>
     </div>
 
@@ -1898,6 +1909,65 @@ body.menu-open .sticky{display:none}
     });
     window.addEventListener('scroll',reflow,{passive:true});
     window.addEventListener('resize',reflow);
+  })();
+
+
+  /* =======================================================
+     [TYPEWRITER] "What a cash offer really is" writes itself
+     Full text stays in the DOM the whole time (SEO-safe, zero shift).
+     To revert: delete this IIFE and the #formula h2 .tw-* CSS.
+  ======================================================= */
+  (function(){
+    var h=document.querySelector('#formula h2');
+    if(!h || !window.IntersectionObserver) return;
+    var full=h.textContent.trim();
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+    h.setAttribute('aria-label',full);
+    var frag=document.createDocumentFragment(), cells=[];
+    for(var i=0;i<full.length;i++){
+      var ch=full.charAt(i);
+      if(ch===' '){ frag.appendChild(document.createTextNode(' ')); cells.push(null); continue; }
+      var sp=document.createElement('span');
+      sp.className='tw-c'; sp.textContent=ch;
+      frag.appendChild(sp); cells.push(sp);
+    }
+    var caret=document.createElement('i');
+    caret.className='tw-caret'; caret.setAttribute('aria-hidden','true');
+    h.textContent='';
+    h.appendChild(frag);
+    h.insertBefore(caret,h.firstChild);
+
+    var started=false;
+    var io=new IntersectionObserver(function(entries){
+      for(var k=0;k<entries.length;k++){
+        if(entries[k].isIntersecting && !started){ started=true; io.disconnect(); setTimeout(run,240); }
+      }
+    },{threshold:0.55});
+    io.observe(h);
+
+    function run(){
+      var i=0;
+      (function tick(){
+        if(i>=cells.length){
+          caret.classList.add('fade');
+          setTimeout(function(){ if(caret.parentNode) caret.parentNode.removeChild(caret); },700);
+          return;
+        }
+        var cell=cells[i], ch=full.charAt(i), d;
+        if(cell){
+          cell.classList.add('on');
+          if(cell.nextSibling) h.insertBefore(caret,cell.nextSibling); else h.appendChild(caret);
+          d=42+Math.random()*58;
+        } else {
+          d=26+Math.random()*40;
+        }
+        if(ch===',') d=230;
+        if(ch==='.') d=300;
+        i++;
+        setTimeout(tick,d);
+      })();
+    }
   })();
 
 
