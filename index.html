@@ -942,7 +942,7 @@ html.autoreply-on .if-autoreply{display:inline}
 
 </head>
 <body>
-<!-- build 2026-08-08m -->
+<!-- build 2026-08-08n -->
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
 
 <!-- ================= HEADER ================= -->
@@ -1728,6 +1728,15 @@ html.autoreply-on .if-autoreply{display:inline}
       if(btn) btn.addEventListener("click",function(){
         restore(d,true); box.classList.remove("on");
       });
+      /* the second somebody starts a fresh entry, the offer to resume the old
+         one stops applying, so it gets out of the way on its own */
+      var dismiss=function(){
+        box.classList.remove("on");
+        form.removeEventListener("input",dismiss);
+        form.removeEventListener("change",dismiss);
+      };
+      form.addEventListener("input",dismiss);
+      form.addEventListener("change",dismiss);
     }
   })();
 
