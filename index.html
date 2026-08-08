@@ -908,7 +908,7 @@ body.menu-open .sticky{display:none}
 
 </head>
 <body>
-<!-- build 2026-08-08b -->
+<!-- build 2026-08-08c -->
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
 
 <!-- ================= UTILITY BAR ================= -->
@@ -1939,13 +1939,29 @@ body.menu-open .sticky{display:none}
     h.appendChild(frag);
     h.insertBefore(caret,h.firstChild);
 
-    var started=false;
+    var started=false, guard=null;
+    function begin(delay){
+      if(started) return;
+      started=true;
+      if(io) io.disconnect();
+      if(guard) clearInterval(guard);
+      setTimeout(run, delay||0);
+    }
     var io=new IntersectionObserver(function(entries){
       for(var k=0;k<entries.length;k++){
-        if(entries[k].isIntersecting && !started){ started=true; io.disconnect(); setTimeout(run,240); }
+        if(entries[k].isIntersecting){ begin(240); }
       }
     },{threshold:0.55});
     io.observe(h);
+
+    /* Backstop: if the observer never fires for any reason, never leave the
+       headline blank. Poll only while the tab is actually visible. */
+    guard=setInterval(function(){
+      if(started){ clearInterval(guard); return; }
+      if(document.hidden) return;
+      var r=h.getBoundingClientRect(), vh=window.innerHeight||document.documentElement.clientHeight;
+      if(r.top < vh && r.bottom > 0){ begin(240); }
+    },900);
 
     function run(){
       var i=0;
