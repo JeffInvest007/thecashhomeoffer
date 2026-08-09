@@ -8,6 +8,10 @@
 <meta name="theme-color" content="#14283F">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://thecashhomeoffer.com/">
+<link rel="alternate" hreflang="en" href="https://thecashhomeoffer.com/">
+<link rel="alternate" hreflang="ht" href="https://thecashhomeoffer.com/kreyol/">
+<link rel="alternate" hreflang="es" href="https://thecashhomeoffer.com/espanol/">
+<link rel="alternate" hreflang="x-default" href="https://thecashhomeoffer.com/">
 <meta name="geo.region" content="US-FL">
 <meta name="geo.placename" content="Miami, Fort Lauderdale, West Palm Beach">
 
@@ -902,6 +906,19 @@ html.autoreply-on .if-autoreply{display:inline}
 }
 .faq details:nth-of-type(2n+3):hover summary::after{border-color:var(--gold)}
 
+
+/* ================= [I18N] language switcher ================= */
+.langbar{background:var(--ink);border-bottom:1px solid rgba(255,255,255,.10)}
+.langbar .wrap{display:flex;gap:4px;padding-top:7px;padding-bottom:7px}
+.lang-pick{
+  color:#9FB7D2;text-decoration:none;font-size:.76rem;font-weight:800;
+  letter-spacing:.06em;padding:5px 12px;border-radius:7px;
+  transition:color .16s ease,background .16s ease,transform .16s var(--lift);
+}
+.lang-pick:hover{color:#fff;background:rgba(255,255,255,.12);transform:translateY(-1px)}
+.lang-pick.on{color:var(--ink);background:var(--gold)}
+@media (max-width:480px){.lang-pick{font-size:.71rem;padding:5px 9px}}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.sticky,header,.util{display:none}}
 
@@ -1025,6 +1042,9 @@ html.autoreply-on .if-autoreply{display:inline}
     <p class="mm-note">Call or text 7 days a week. If we miss you, we call back the same day.<br>Nou pale Kreyòl &middot; Se habla español</p>
   </div>
 </nav>
+
+<!-- ================= LANGUAGE ================= -->
+<div class="langbar"><div class="wrap"><a class="lang-pick on" href="/" hreflang="en">English</a><a class="lang-pick" href="/kreyol/" hreflang="ht">Kreyòl</a><a class="lang-pick" href="/espanol/" hreflang="es">Español</a></div></div>
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
