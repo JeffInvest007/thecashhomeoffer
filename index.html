@@ -1203,7 +1203,7 @@ html.autoreply-on .if-autoreply{display:inline}
                 <div class="err-msg" id="e5">Please enter a real email address. That is where your written offer goes.</div>
               </div>
               <div class="fld">
-                <label for="heard">How did you hear about us?</label>
+                <label for="heard">How did you hear about us? (optional)</label>
                 <select id="heard" name="How They Heard">
                   <option value="">Choose one</option>
                   <option>Sticky note left at my property</option>
@@ -1925,7 +1925,7 @@ html.autoreply-on .if-autoreply{display:inline}
       em.addEventListener("blur",function(){ if(em.value.trim()) setErr("e5",checkEmail(em.value),em); });
       em.addEventListener("input",function(){ if(em.classList.contains("err")) setErr("e5",checkEmail(em.value),em); });
     }
-    if(hd) hd.addEventListener("change",function(){ err("e6",!hd.value); mark(hd,!hd.value); });
+    if(hd) hd.addEventListener("change",function(){ err("e6",false); mark(hd,false); });
     if(ad) ad.addEventListener("input",function(){ if(ad.classList.contains("err")) setErr("e1",checkAddress(ad.value),ad); });
   })();
   /* phone formatting */
@@ -1946,7 +1946,7 @@ html.autoreply-on .if-autoreply{display:inline}
     var badN=nm.value.trim().length<2;
     var badP=digits(pn.value).length!==10;
     var rE=checkEmail(em.value);
-    var badH=!hd.value;
+    var badH=false;
     err("e3",badN); mark(nm,badN);
     err("e4",badP); mark(pn,badP);
     setErr("e5",rE,em);
