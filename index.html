@@ -1197,7 +1197,7 @@ html.autoreply-on .if-autoreply{display:inline}
                 <div class="err-msg" id="e4">Please enter a valid 10-digit phone number.</div>
               </div>
               <div class="fld">
-                <label for="email">Email address</label>
+                <label for="email">Email address (optional)</label>
                 <p class="hint">Your written offer goes here.<span class="if-autoreply"> We email you a confirmation the second you hit send.</span></p>
                 <input type="email" id="email" name="Email" placeholder="you@gmail.com" autocomplete="email" inputmode="email">
                 <div class="err-msg" id="e5">Please enter a real email address. That is where your written offer goes.</div>
@@ -1945,7 +1945,7 @@ html.autoreply-on .if-autoreply{display:inline}
     var em=document.getElementById("email"), hd=document.getElementById("heard");
     var badN=nm.value.trim().length<2;
     var badP=digits(pn.value).length!==10;
-    var rE=checkEmail(em.value);
+    var rE=em.value.trim()?checkEmail(em.value):{ok:true};
     var badH=false;
     err("e3",badN); mark(nm,badN);
     err("e4",badP); mark(pn,badP);
