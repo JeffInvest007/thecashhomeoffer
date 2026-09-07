@@ -1127,22 +1127,14 @@ html.autoreply-on .if-autoreply{display:inline}
 
             <!-- STEP 1 -->
             <div class="cf-step on" data-step="1">
-              <span class="cf-count">Paso 1 de 3</span>
+              <span class="cf-count">Paso 1 de 2</span>
               <div class="fld">
                 <label for="address">¿Cuál es la dirección de la propiedad?</label>
                 <p class="hint">La calle y la ciudad como mínimo. El código postal ayuda. Nosotros buscamos el resto.</p>
                 <input type="text" id="address" name="Property Address" placeholder="1234 NW 12th St, Miami, FL 33125" autocomplete="street-address" inputmode="text">
                 <div class="err-msg" id="e1">Por favor escriba la dirección de la propiedad para poder hacer los números.</div>
               </div>
-              <div class="cf-nav">
-                <button type="button" class="btn btn-gold btn-block" data-next="1">Continuar  →</button>
-              </div>
-            </div>
-
-            <!-- STEP 2 -->
-            <div class="cf-step" data-step="2">
-              <span class="cf-count">Paso 2 de 3</span>
-              <div class="fld">
+                <div class="fld">
                 <label for="condition">¿En qué condición está?</label>
                 <select id="condition" name="Condition">
                   <option value="">Elija una</option>
@@ -1154,37 +1146,13 @@ html.autoreply-on .if-autoreply{display:inline}
                 </select>
                 <div class="err-msg" id="e2">Elija la respuesta más cercana. Un estimado basta.</div>
               </div>
-              <div class="fld">
-                <label>¿Qué está pasando con la propiedad?</label>
-                <div class="opts" role="group" aria-label="Reason for selling">
-                  <label class="opt"><input type="radio" name="Situation" value="Inherited / probate"><span>Heredada / sucesión</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Behind on payments / foreclosure"><span>Ejecución hipotecaria</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Tired landlord / bad tenants"><span>Cansado de rentar</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Divorce"><span>Divorcio</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Relocating"><span>Me mudo</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Liens / code violations / taxes"><span>Gravámenes o violaciones</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Too many repairs"><span>Demasiadas reparaciones</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Other"><span>Otra cosa</span></label>
-                </div>
-              </div>
-              <div class="fld">
-                <label>¿Qué tan rápido necesita salir?</label>
-                <div class="opts" role="group" aria-label="Timeline">
-                  <label class="opt"><input type="radio" name="Timeline" value="ASAP - within 2 weeks"><span>Lo antes posible</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="30 days"><span>30 días</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="60-90 days"><span>60-90 días</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="Just exploring"><span>Solo estoy explorando</span></label>
-                </div>
-              </div>
               <div class="cf-nav">
-                <button type="button" class="back" data-back="2">← Atrás</button>
-                <button type="button" class="btn btn-gold" style="flex:1" data-next="2">Continuar  →</button>
+                <button type="button" class="btn btn-gold btn-block" data-next="1">Continuar  →</button>
               </div>
             </div>
 
-            <!-- STEP 3 -->
-            <div class="cf-step" data-step="3">
-              <span class="cf-count">Paso 3 de 3 · El último</span>
+            <div class="cf-step" data-step="2">
+              <span class="cf-count">Paso 2 de 2 · El último</span>
               <div class="fld">
                 <label for="name">Su nombre</label>
                 <input type="text" id="name" name="Name" placeholder="First and last name" autocomplete="name">
@@ -1226,7 +1194,7 @@ html.autoreply-on .if-autoreply{display:inline}
               </div>
               <p class="consent">Al oprimir Quiero Mi Oferta usted le está pidiendo a The Cash Home Offer (Probate Assets Elite LLC) que le contacte sobre esta propiedad. Usted acepta que podemos llamarle, escribirle o enviarle correos al número y la dirección que nos dio, incluso por medios automatizados. Pueden aplicar tarifas de mensajes y datos. El consentimiento <strong>no</strong> es condición de ninguna venta. Responda STOP a cualquier texto para salirse, o simplemente dígannos y paramos. Nunca vendemos ni compartimos su información con nadie. Vea nuestro <a href="#privacy">Aviso de Privacidad</a>.</p>
               <div class="cf-nav" style="margin-top:6px">
-                <button type="button" class="back" data-back="3">← Atrás</button>
+                <button type="button" class="back" data-back="2">← Atrás</button>
               </div>
             </div>
           </form>
@@ -1268,7 +1236,35 @@ html.autoreply-on .if-autoreply{display:inline}
           <p class="done-cta-label">¿No quiere esperar nuestra llamada?</p>
           <a class="btn btn-ink btn-lg" href="tel:+17869207419" data-track="call-thankyou">Llame al (786) 920-7419 ahora</a>
           <a class="done-sms" href="sms:+17869207419?&body=Hola%20Jeff%2C%20acabo%20de%20enviar%20mi%20propiedad%20en%20su%20sitio%20web.">O mándenos un texto</a>
-        </div>
+        <style>#followUp{margin-top:26px;padding-top:22px;border-top:1px solid rgba(0,0,0,.12);text-align:left}#followUp .fu-intro{font-size:15px;opacity:.85;margin-bottom:16px}#followUp .fu-thanks{display:none;font-weight:600}#followUp.sent .fu-intro,#followUp.sent .fld,#followUp.sent #followUpBtn{display:none}#followUp.sent .fu-thanks{display:block}</style>
+<div id="followUp">
+<p class="fu-intro">Dos preguntas rápidas y opcionales mientras está aquí. Ayudan a Jeff a preparar un número más preciso antes de llamarle.</p>
+<div class="fld">
+                <label>¿Qué está pasando con la propiedad?</label>
+                <div class="opts" role="group" aria-label="Reason for selling">
+                  <label class="opt"><input type="radio" name="Situation" value="Inherited / probate"><span>Heredada / sucesión</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Behind on payments / foreclosure"><span>Ejecución hipotecaria</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Tired landlord / bad tenants"><span>Cansado de rentar</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Divorce"><span>Divorcio</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Relocating"><span>Me mudo</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Liens / code violations / taxes"><span>Gravámenes o violaciones</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Too many repairs"><span>Demasiadas reparaciones</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Other"><span>Otra cosa</span></label>
+                </div>
+              </div>
+<div class="fld">
+                <label>¿Qué tan rápido necesita salir?</label>
+                <div class="opts" role="group" aria-label="Timeline">
+                  <label class="opt"><input type="radio" name="Timeline" value="ASAP - within 2 weeks"><span>Lo antes posible</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="30 days"><span>30 días</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="60-90 days"><span>60-90 días</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="Just exploring"><span>Solo estoy explorando</span></label>
+                </div>
+              </div>
+<button type="button" id="followUpBtn" class="btn btn-gold">Enviar estos detalles</button>
+<p class="fu-thanks">Listo. Eso ayuda. Jeff tendrá esto delante cuando le llame.</p>
+</div>
+</div>
       </div>
     </div>
 
@@ -1742,7 +1738,7 @@ html.autoreply-on .if-autoreply{display:inline}
   var formBody=document.getElementById("formBody");
   var cur=1;
 
-  function setBar(n){ if(bar) bar.style.width=(n/3*100)+"%"; }
+  function setBar(n){ if(bar) bar.style.width=(n/2*100)+"%"; }
 
   function show(n){
     cur=n;
@@ -1777,7 +1773,7 @@ html.autoreply-on .if-autoreply{display:inline}
     });
     if(d.situation){ var s=form.querySelector('input[name="Situation"][value="'+d.situation+'"]'); if(s) s.checked=true; }
     if(d.timeline){ var t=form.querySelector('input[name="Timeline"][value="'+d.timeline+'"]'); if(t) t.checked=true; }
-    if(goStep){ show(Math.min(d.step||1,3)); setBar(Math.min(d.step||1,3)); }
+    if(goStep){ show(Math.min(d.step||1,2)); setBar(Math.min(d.step||1,2)); }
   }
 
   /* resume banner (Offerpad-style abandoned funnel recovery) */
@@ -2629,6 +2625,39 @@ html.autoreply-on .if-autoreply{display:inline}
       }, 50);
     });
   }
+})();
+</script>
+<script>
+/* ---- Optional follow-up questions on the thank-you panel (added 2026-08-31) ---- */
+(function(){
+  var fu=document.getElementById("followUp");
+  var btn=document.getElementById("followUpBtn");
+  var form=document.getElementById("offerForm");
+  if(!fu||!btn||!form) return;
+  var snap={address:"",name:"",phone:""};
+  function val(id){ var e=document.getElementById(id); return e?e.value:""; }
+  form.addEventListener("submit",function(){ snap={address:val("address"),name:val("name"),phone:val("phone")}; },true);
+  btn.addEventListener("click",function(){
+    var sit=fu.querySelector('input[name="Situation"]:checked');
+    var tl=fu.querySelector('input[name="Timeline"]:checked');
+    if(sit||tl){
+      try{
+        var key=form.querySelector('input[name="access_key"]');
+        var fd=new FormData();
+        if(key) fd.append("access_key",key.value);
+        fd.append("subject","FOLLOW UP  |  "+snap.phone+"  |  "+snap.address);
+        fd.append("from_name","The Cash Home Offer");
+        fd.append("Property Address",snap.address);
+        fd.append("Name",snap.name);
+        fd.append("Phone",snap.phone);
+        fd.append("Situation",sit?sit.value:"");
+        fd.append("Timeline",tl?tl.value:"");
+        fetch("https://api.web3forms.com/submit",{method:"POST",body:fd});
+      }catch(e){}
+      if(typeof gtag==="function"){ try{ gtag("event","lead_details_added",{}); }catch(e){} }
+    }
+    fu.classList.add("sent");
+  });
 })();
 </script>
 </body>
