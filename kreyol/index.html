@@ -1127,22 +1127,14 @@ html.autoreply-on .if-autoreply{display:inline}
 
             <!-- STEP 1 -->
             <div class="cf-step on" data-step="1">
-              <span class="cf-count">Etap 1 sou 3</span>
+              <span class="cf-count">Etap 1 sou 2</span>
               <div class="fld">
                 <label for="address">Ki adrès pwopriyete a?</label>
                 <p class="hint">Omwen lari a ak vil la. Kòd postal la ede. N ap jwenn rès la.</p>
                 <input type="text" id="address" name="Property Address" placeholder="1234 NW 12th St, Miami, FL 33125" autocomplete="street-address" inputmode="text">
                 <div class="err-msg" id="e1">Tanpri mete adrès pwopriyete a pou nou ka fè kalkil yo.</div>
               </div>
-              <div class="cf-nav">
-                <button type="button" class="btn btn-gold btn-block" data-next="1">Kontinye  →</button>
-              </div>
-            </div>
-
-            <!-- STEP 2 -->
-            <div class="cf-step" data-step="2">
-              <span class="cf-count">Etap 2 sou 3</span>
-              <div class="fld">
+                <div class="fld">
                 <label for="condition">Nan ki kondisyon li ye?</label>
                 <select id="condition" name="Condition">
                   <option value="">Chwazi youn</option>
@@ -1154,37 +1146,13 @@ html.autoreply-on .if-autoreply{display:inline}
                 </select>
                 <div class="err-msg" id="e2">Chwazi repons ki pi pre a. Yon estimasyon apeprè sifi.</div>
               </div>
-              <div class="fld">
-                <label>Kisa k ap pase ak pwopriyete a?</label>
-                <div class="opts" role="group" aria-label="Reason for selling">
-                  <label class="opt"><input type="radio" name="Situation" value="Inherited / probate"><span>Eritaj / sisesyon</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Behind on payments / foreclosure"><span>Sezi kay</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Tired landlord / bad tenants"><span>Pwopriyetè bouke</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Divorce"><span>Divòs</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Relocating"><span>M ap demenaje</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Liens / code violations / taxes"><span>Privilèj oswa vyolasyon</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Too many repairs"><span>Twòp reparasyon</span></label>
-                  <label class="opt"><input type="radio" name="Situation" value="Other"><span>Yon lòt bagay</span></label>
-                </div>
-              </div>
-              <div class="fld">
-                <label>Nan konbyen tan ou bezwen soti?</label>
-                <div class="opts" role="group" aria-label="Timeline">
-                  <label class="opt"><input type="radio" name="Timeline" value="ASAP - within 2 weeks"><span>Pi vit posib</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="30 days"><span>30 jou</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="60-90 days"><span>60-90 jou</span></label>
-                  <label class="opt"><input type="radio" name="Timeline" value="Just exploring"><span>M ap gade sèlman</span></label>
-                </div>
-              </div>
               <div class="cf-nav">
-                <button type="button" class="back" data-back="2">← Retounen</button>
-                <button type="button" class="btn btn-gold" style="flex:1" data-next="2">Kontinye  →</button>
+                <button type="button" class="btn btn-gold btn-block" data-next="1">Kontinye  →</button>
               </div>
             </div>
 
-            <!-- STEP 3 -->
-            <div class="cf-step" data-step="3">
-              <span class="cf-count">Etap 3 sou 3 · Dènye a</span>
+            <div class="cf-step" data-step="2">
+              <span class="cf-count">Etap 2 sou 2 · Dènye a</span>
               <div class="fld">
                 <label for="name">Non ou</label>
                 <input type="text" id="name" name="Name" placeholder="First and last name" autocomplete="name">
@@ -1226,7 +1194,7 @@ html.autoreply-on .if-autoreply{display:inline}
               </div>
               <p class="consent">Lè ou klike Jwenn Ofri Kach Mwen, w ap mande The Cash Home Offer (Probate Assets Elite LLC) pou kontakte ou konsènan pwopriyete sa a. Ou dakò nou ka rele ou, voye tèks oswa imèl ba ou nan nimewo ak adrès ou ban nou an, menm ak sistèm otomatik. Tarif mesaj ak done ka aplike. Konsantman an <strong>pa</strong> yon kondisyon pou okenn vant. Reponn STOP nan nenpòt tèks pou sispann, oswa di nou senpleman epi n ap sispann. Nou pa janm vann ni pataje enfòmasyon ou ak pèsonn. Gade <a href="#privacy">Avi Konfidansyalite nou an</a>.</p>
               <div class="cf-nav" style="margin-top:6px">
-                <button type="button" class="back" data-back="3">← Retounen</button>
+                <button type="button" class="back" data-back="2">← Retounen</button>
               </div>
             </div>
           </form>
@@ -1268,7 +1236,35 @@ html.autoreply-on .if-autoreply{display:inline}
           <p class="done-cta-label">Ou pa vle tann apèl nou an?</p>
           <a class="btn btn-ink btn-lg" href="tel:+17869207419" data-track="call-thankyou">Rele (786) 920-7419 kounye a</a>
           <a class="done-sms" href="sms:+17869207419?&body=Bonjou%20Jeff%2C%20mwen%20fenk%20voye%20pwopriyete%20mwen%20sou%20sit%20la.">Oswa voye yon tèks ba nou</a>
-        </div>
+        <style>#followUp{margin-top:26px;padding-top:22px;border-top:1px solid rgba(0,0,0,.12);text-align:left}#followUp .fu-intro{font-size:15px;opacity:.85;margin-bottom:16px}#followUp .fu-thanks{display:none;font-weight:600}#followUp.sent .fu-intro,#followUp.sent .fld,#followUp.sent #followUpBtn{display:none}#followUp.sent .fu-thanks{display:block}</style>
+<div id="followUp">
+<p class="fu-intro">De ti kesyon opsyonèl pandan ou la. Yo ede Jeff prepare yon pi bon chif anvan li rele w.</p>
+<div class="fld">
+                <label>Kisa k ap pase ak pwopriyete a?</label>
+                <div class="opts" role="group" aria-label="Reason for selling">
+                  <label class="opt"><input type="radio" name="Situation" value="Inherited / probate"><span>Eritaj / sisesyon</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Behind on payments / foreclosure"><span>Sezi kay</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Tired landlord / bad tenants"><span>Pwopriyetè bouke</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Divorce"><span>Divòs</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Relocating"><span>M ap demenaje</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Liens / code violations / taxes"><span>Privilèj oswa vyolasyon</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Too many repairs"><span>Twòp reparasyon</span></label>
+                  <label class="opt"><input type="radio" name="Situation" value="Other"><span>Yon lòt bagay</span></label>
+                </div>
+              </div>
+<div class="fld">
+                <label>Nan konbyen tan ou bezwen soti?</label>
+                <div class="opts" role="group" aria-label="Timeline">
+                  <label class="opt"><input type="radio" name="Timeline" value="ASAP - within 2 weeks"><span>Pi vit posib</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="30 days"><span>30 jou</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="60-90 days"><span>60-90 jou</span></label>
+                  <label class="opt"><input type="radio" name="Timeline" value="Just exploring"><span>M ap gade sèlman</span></label>
+                </div>
+              </div>
+<button type="button" id="followUpBtn" class="btn btn-gold">Voye detay sa yo</button>
+<p class="fu-thanks">Nou resevwa l. Sa ede anpil. Jeff ap gen sa devan l lè li rele w.</p>
+</div>
+</div>
       </div>
     </div>
 
@@ -1742,7 +1738,7 @@ html.autoreply-on .if-autoreply{display:inline}
   var formBody=document.getElementById("formBody");
   var cur=1;
 
-  function setBar(n){ if(bar) bar.style.width=(n/3*100)+"%"; }
+  function setBar(n){ if(bar) bar.style.width=(n/2*100)+"%"; }
 
   function show(n){
     cur=n;
@@ -1777,7 +1773,7 @@ html.autoreply-on .if-autoreply{display:inline}
     });
     if(d.situation){ var s=form.querySelector('input[name="Situation"][value="'+d.situation+'"]'); if(s) s.checked=true; }
     if(d.timeline){ var t=form.querySelector('input[name="Timeline"][value="'+d.timeline+'"]'); if(t) t.checked=true; }
-    if(goStep){ show(Math.min(d.step||1,3)); setBar(Math.min(d.step||1,3)); }
+    if(goStep){ show(Math.min(d.step||1,2)); setBar(Math.min(d.step||1,2)); }
   }
 
   /* resume banner (Offerpad-style abandoned funnel recovery) */
@@ -2629,6 +2625,39 @@ html.autoreply-on .if-autoreply{display:inline}
       }, 50);
     });
   }
+})();
+</script>
+<script>
+/* ---- Optional follow-up questions on the thank-you panel (added 2026-08-31) ---- */
+(function(){
+  var fu=document.getElementById("followUp");
+  var btn=document.getElementById("followUpBtn");
+  var form=document.getElementById("offerForm");
+  if(!fu||!btn||!form) return;
+  var snap={address:"",name:"",phone:""};
+  function val(id){ var e=document.getElementById(id); return e?e.value:""; }
+  form.addEventListener("submit",function(){ snap={address:val("address"),name:val("name"),phone:val("phone")}; },true);
+  btn.addEventListener("click",function(){
+    var sit=fu.querySelector('input[name="Situation"]:checked');
+    var tl=fu.querySelector('input[name="Timeline"]:checked');
+    if(sit||tl){
+      try{
+        var key=form.querySelector('input[name="access_key"]');
+        var fd=new FormData();
+        if(key) fd.append("access_key",key.value);
+        fd.append("subject","FOLLOW UP  |  "+snap.phone+"  |  "+snap.address);
+        fd.append("from_name","The Cash Home Offer");
+        fd.append("Property Address",snap.address);
+        fd.append("Name",snap.name);
+        fd.append("Phone",snap.phone);
+        fd.append("Situation",sit?sit.value:"");
+        fd.append("Timeline",tl?tl.value:"");
+        fetch("https://api.web3forms.com/submit",{method:"POST",body:fd});
+      }catch(e){}
+      if(typeof gtag==="function"){ try{ gtag("event","lead_details_added",{}); }catch(e){} }
+    }
+    fu.classList.add("sent");
+  });
 })();
 </script>
 </body>
