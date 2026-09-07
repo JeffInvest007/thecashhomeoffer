@@ -2367,13 +2367,7 @@ html.autoreply-on .if-autoreply{display:inline}
   function track(name,params){
     try{ if(typeof window.gtag==="function"){ window.gtag("event",name,params||{}); } }catch(e){}
   }
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.addEventListener("click",function(){
-      track("phone_call_click",{location:a.dataset.track||"unknown",campaign:CAMPAIGN});
-    });
-  });
-  document.querySelectorAll('a[href^="sms:"]').forEach(function(a){
-    a.addEventListener("click",function(){ track("sms_click",{campaign:CAMPAIGN}); });
+  
   });
 
 
@@ -2594,6 +2588,47 @@ html.autoreply-on .if-autoreply{display:inline}
   /* init bar */
   setBar(1);
 
+})();
+</script>
+<script>
+/* ---- Funnel visibility patch (added 2026-08-31) ----
+   Adds form_start and form_resumed so the funnel has a top and so
+   resumed sessions stop producing orphan step events. Phone, text and
+   email click events are handled by the shared tracking block above;
+   the duplicate listeners that also fired phone_call_click and a second
+   sms_click were removed so those are only counted once. */
+(function () {
+  function ev(name, params) {
+    if (typeof gtag === "function") {
+      try { gtag("event", name, params || {}); } catch (e) {}
+    }
+  }
+  var form = document.getElementById("offerForm");
+  if (!form) return;
+
+  var started = false;
+  function markStart() {
+    if (started) return;
+    started = true;
+    ev("form_start", { page_location: location.href });
+  }
+  form.addEventListener("input", markStart, true);
+  form.addEventListener("change", markStart, true);
+
+  var resumeBtn = document.getElementById("resumeBtn");
+  if (resumeBtn) {
+    resumeBtn.addEventListener("click", function () {
+      started = true;
+      setTimeout(function () {
+        var steps = document.querySelectorAll(".cf-step");
+        var at = 1;
+        for (var i = 0; i < steps.length; i++) {
+          if (steps[i].classList.contains("on")) { at = i + 1; break; }
+        }
+        ev("form_resumed", { resumed_at_step: at, page_location: location.href });
+      }, 50);
+    });
+  }
 })();
 </script>
 </body>
