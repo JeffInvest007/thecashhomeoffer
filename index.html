@@ -1004,7 +1004,7 @@ html.autoreply-on .if-autoreply{display:inline}
   }, true);
 })();
 </script>
-</head>
+<script>(function(){var K="tcho_lead_v1",MAX=6048e5;try{var d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.t&&Date.now()-d.t>MAX){localStorage.removeItem(K)}}catch(e){}document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("resumeClear");if(c){c.addEventListener("click",function(){try{localStorage.removeItem(K)}catch(e){}var r=document.getElementById("resume");if(r){r.style.display="none"}location.reload()})}})})();</script></head>
 <body>
 <!-- build 2026-08-08q -->
 <a class="skip" href="#offer-form">Skip to the cash offer form</a>
@@ -1112,7 +1112,7 @@ html.autoreply-on .if-autoreply{display:inline}
         <div class="cf-body" id="formBody">
           <div class="resume" id="resume">
             <b>Welcome back.</b>
-            You started an offer for <span id="resumeAddr"></span>. <button type="button" id="resumeBtn">Pick up where you left off</button>
+            Want to pick up where you left off? <span id="resumeAddr" hidden></span><button type="button" id="resumeBtn">Resume</button> <button type="button" id="resumeClear">Start over</button>
           </div>
 
           <form id="offerForm" novalidate>
