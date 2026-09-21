@@ -1131,7 +1131,7 @@ html.autoreply-on .if-autoreply{display:inline}
               <div class="fld">
                 <label for="address">¿Cuál es la dirección de la propiedad?</label>
                 <p class="hint">La calle y la ciudad como mínimo. El código postal ayuda. Nosotros buscamos el resto.</p>
-                <input type="text" id="address" name="Property Address" placeholder="1234 NW 12th St, Miami, FL 33125" autocomplete="street-address" inputmode="text">
+                <input type="text" id="address" required name="Property Address" placeholder="1234 NW 12th St, Miami, FL 33125" autocomplete="street-address" inputmode="text">
                 <div class="err-msg" id="e1">Por favor escriba la dirección de la propiedad para poder hacer los números.</div>
               </div>
                 <div class="fld">
@@ -1155,13 +1155,13 @@ html.autoreply-on .if-autoreply{display:inline}
               <span class="cf-count">Paso 2 de 2 · El último</span>
               <div class="fld">
                 <label for="name">Su nombre</label>
-                <input type="text" id="name" name="Name" placeholder="First and last name" autocomplete="name">
+                <input type="text" id="name" required name="Name" placeholder="First and last name" autocomplete="name">
                 <div class="err-msg" id="e3">Por favor díganos con quién estamos hablando.</div>
               </div>
               <div class="fld">
                 <label for="phone">Mejor número de teléfono</label>
                 <p class="hint">Así es como le hacemos llegar su oferta más rápido.</p>
-                <input type="tel" id="phone" name="Phone" placeholder="(786) 555-0134" autocomplete="tel" inputmode="tel">
+                <input type="tel" id="phone" required name="Phone" placeholder="(786) 555-0134" autocomplete="tel" inputmode="tel">
                 <div class="err-msg" id="e4">Por favor escriba un número de teléfono válido de 10 dígitos.</div>
               </div>
               <div class="fld">
