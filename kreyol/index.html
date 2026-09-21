@@ -1004,7 +1004,7 @@ html.autoreply-on .if-autoreply{display:inline}
   }, true);
 })();
 </script>
-<script>(function(){var K="tcho_lead_v1",MAX=6048e5;try{var d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.t&&Date.now()-d.t>MAX){localStorage.removeItem(K)}}catch(e){}document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("resumeClear");if(c){c.addEventListener("click",function(){try{localStorage.removeItem(K)}catch(e){}var f=document.getElementById("offerForm");if(f){var els=f.querySelectorAll("input,select,textarea");for(var i=0;i<els.length;i++){var t=els[i].type;if(t!=="hidden"&&t!=="checkbox"&&t!=="submit"&&t!=="button"){els[i].value=""}}}var r=document.getElementById("resume");if(r){r.style.display="none"}try{localStorage.removeItem(K)}catch(e){}})}})})();</script></head>
+<script>(function(){var K="tcho_lead_v1",MAX=6048e5;try{var d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.t&&Date.now()-d.t>MAX){localStorage.removeItem(K)}}catch(e){}document.addEventListener("click",function(ev){var n=ev.target,hit=false;while(n&&n.nodeType===1){if(n.id==="resumeClear"){hit=true;break}n=n.parentNode}if(!hit){return}ev.preventDefault();ev.stopPropagation();var f=document.getElementById("offerForm");if(f){var els=f.querySelectorAll("input,select,textarea");for(var i=0;i<els.length;i++){var t=els[i].type;if(t!=="hidden"&&t!=="checkbox"&&t!=="submit"&&t!=="button"){els[i].value=""}}}var r=document.getElementById("resume");if(r){r.style.display="none"}try{localStorage.removeItem(K)}catch(e){}},true)})();</script></head>
 <body>
 <!-- build 2026-08-08q ht -->
 <a class="skip" href="#offer-form">Ale dirèk nan fòm ofri kach la</a>
